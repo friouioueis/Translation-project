@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<head>
+	<title>TranslaTech</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="sticky-top">
+
+		<!-- //////////////Logo and social media///////////////////// -->
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #41B3A3">
+		<a class="navbar-brand logo" href="#" title="TranslaTech">TranslaTech</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#SocialMedia" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	    </button>
+		<div class="collapse navbar-collapse justify-content-end" id="SocialMedia">
+		    <ul class="navbar-nav nav-right">
+		      <li class="nav-item active">
+		        <a class="nav-link mr-5" href="#" title="Facebook"><img src="{% static 'icons/Facebook.png' %}"></img></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link mr-5" href="#" title="Instagram"><img src="{% static 'icons/Instagram.png' %}"></img></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link mr-5" href="#" title="Youtube"><img src="{% static 'icons/YouTube.png' %}"></img></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link mr-5" href="#" title="Gmail"><img src="{% static 'icons/Gmail.png' %}"></img></a>
+		      </li>
+		    </ul>
+		</div>
+</nav>
+
+			<!-- //////////////////Options bar////////////////////// -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #85D0CB">
+{#		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#SocialMedia1" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#		<span class="navbar-toggler-icon"></span>#}
+{#	    </button>#}
+		<div class="navbar-collapse justify-content-end" id="SocialMedia1">
+		    <ul class="navbar-nav nav-right">
+		    <li class="nav-item active">
+		        <a class="nav-link menu-item" href="#" title="home"><b>Home</b></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link menu-item" href="#" title="Traductions"><b>Nos traductions</b></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link menu-item" href="#" title="Liste"><b>Traducteurs</b></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link menu-item" href="#" title="blog"><b>Blog</b></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link menu-item" href="#" title="Recrutement"><b>Recrutement</b></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link menu-item" href="#" title="About"><b>A propos</b></a>
+		      </li>
+		    </ul>
+		</div>
+</nav>
+                {#////////////////messsages////////////////#}
+{% if messages %}
+      <div>
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    {% endfor %}
+      </div>
+  {% endif %}
+
+</div>
+
+	<!-- /////////////////////////////////Slide Image/////////////////////////// -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100 blur" src="{% static 'Images/computer.jpg' %}" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>Le meilleur site pour la traduction de vos documents</h1>
+    <p>Naviguez-vous et bénéficiez</p>
+  </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 blur" src="{% static 'Images/translator.jpg' %}" alt="Second slide">
+       <div class="carousel-caption d-none d-md-block">
+    <h1>Traduction vers n'importe quelle langue</h1>
+    <p>Service de luxe</p>
+  </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 blur" src="{% static 'Images/staff.jpg' %}" alt="Third slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>Une équipe de traducteurs bien formés</h1>
+    <p>vous demandez nous fournissons</p>
+  </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+	<!-- //////////Left description side ////////////////////-->
+
+<div class="col">
+    {#        //////1st card////////            #}
+
+	<div class="card pt-4 ml-5 mb-2 mt-2">
+  <img class="card-img-top" src="{% static 'Images/translator.jpg' %}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolor excepturi, exercitationem minus quisquam recusandae? Distinctio quaerat, qui? Dolorum obcaecati possimus saepe suscipit unde! Aspernatur excepturi inventore laborum quod sint.</p>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#firstmodal" >Lire la suite</a>
+  </div>
+</div>
+
+    {#        //////2nd card////////            #}
+<div class="card mt-5 pt-4 ml-5 mb-2">
+  <img class="card-img-top" src="{% static 'Images/translator.jpg' %}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolor excepturi, exercitationem minus quisquam recusandae? Distinctio quaerat, qui? Dolorum obcaecati possimus saepe suscipit unde! Aspernatur excepturi inventore laborum quod sint.</p>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#secondmodal" >Lire la suite</a>
+  </div>
+</div>
+
+    {#        //////3rd card////////            #}
+<div class="card mt-5 pt-4 ml-5 mb-2">
+  <img class="card-img-top" src="{% static 'Images/translator.jpg' %}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolor excepturi, exercitationem minus quisquam recusandae? Distinctio quaerat, qui? Dolorum obcaecati possimus saepe suscipit unde! Aspernatur excepturi inventore laborum quod sint.</p>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#thirdmodal" >Lire la suite</a>
+  </div>
+</div>
+</div>
+            {#        //////1st modal////////            #}
+<div class="modal fade" id="firstmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Translatech</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolor excepturi, exercitationem minus quisquam recusandae? Distinctio quaerat, qui? Dolorum obcaecati possimus saepe suscipit unde! Aspernatur excepturi inventore laborum quod sint.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci alias aperiam enim error est fugit ipsum, minima molestias nesciunt possimus, provident quam quo reiciendis soluta, tempore voluptas voluptatem.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dolores excepturi minus molestias nemo nulla numquam praesentium quam soluta. Atque commodi earum et fugiat ullam veniam voluptatem. Laudantium quos, unde?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cupiditate dignissimos facere illum impedit ipsam itaque, iure molestias, nobis praesentium, quae recusandae sed sunt ut vel veritatis vitae? Exercitationem, quibusdam!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem delectus dignissimos laudantium magnam molestias neque nostrum obcaecati optio pariatur porro quae quasi, quis quisquam rem repellat temporibus veniam voluptas?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{#        //////2nd modal////////            #}
+<div class="modal fade" id="secondmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Traducteurs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolor excepturi, exercitationem minus quisquam recusandae? Distinctio quaerat, qui? Dolorum obcaecati possimus saepe suscipit unde! Aspernatur excepturi inventore laborum quod sint.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci alias aperiam enim error est fugit ipsum, minima molestias nesciunt possimus, provident quam quo reiciendis soluta, tempore voluptas voluptatem.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dolores excepturi minus molestias nemo nulla numquam praesentium quam soluta. Atque commodi earum et fugiat ullam veniam voluptatem. Laudantium quos, unde?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cupiditate dignissimos facere illum impedit ipsam itaque, iure molestias, nobis praesentium, quae recusandae sed sunt ut vel veritatis vitae? Exercitationem, quibusdam!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem delectus dignissimos laudantium magnam molestias neque nostrum obcaecati optio pariatur porro quae quasi, quis quisquam rem repellat temporibus veniam voluptas?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{#        //////3rd modal////////            #}
+
+<div class="modal fade" id="thirdmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Clientelle</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolor excepturi, exercitationem minus quisquam recusandae? Distinctio quaerat, qui? Dolorum obcaecati possimus saepe suscipit unde! Aspernatur excepturi inventore laborum quod sint.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci alias aperiam enim error est fugit ipsum, minima molestias nesciunt possimus, provident quam quo reiciendis soluta, tempore voluptas voluptatem.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dolores excepturi minus molestias nemo nulla numquam praesentium quam soluta. Atque commodi earum et fugiat ullam veniam voluptatem. Laudantium quos, unde?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cupiditate dignissimos facere illum impedit ipsam itaque, iure molestias, nobis praesentium, quae recusandae sed sunt ut vel veritatis vitae? Exercitationem, quibusdam!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem delectus dignissimos laudantium magnam molestias neque nostrum obcaecati optio pariatur porro quae quasi, quis quisquam rem repellat temporibus veniam voluptas?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% block content %}
+						<!-- ////////////////////right Side///////////////-->
+<div class="col">
+ 	<button type="button" class="btn btn-primary btn-cnx mt-4 mr-4 ml-5 mb-2" onclick="ShowAndHide('connexform','inscrform')">Connexion</button>
+ 	<button type="button" class="btn btn-primary btn-cnx mt-4 mr-2 ml-5 mb-2" onclick="ShowAndHide('inscrform', 'connexform')">Inscription</button>
+
+							<!-- Login Form-->
+<form class="text-center border border-light p-5 mt-2 mr-2 ml-2 mb-2 forms-display" id="connexform" action="{% url 'Traduction:Login' %}" method="post">
+    {% csrf_token %}
+    <p class="h4 mb-4">Connexion</p>
+    <input type="email" class="form-control mb-4" placeholder="E-mail" name="Email">
+    <input type="password" class="form-control mb-4" placeholder="Mot de passe" name="Password">
+    <button class="btn btn-info btn-block my-4" type="submit">Se connecter</button>
+
+    <p>Pas un membre?
+        <button class="btn btn-link" onclick="ShowAndHide('inscrform','connexform')"><a>S'inscrire</a></button>
+    </p>
+</form>
+						<!-- //////////SignUp Form///////////// -->
+<form class="text-center border border-light p-5 mt-2 mr-2 ml-2 mb-2 forms-display" id="inscrform" method="post"  action="{% url 'Traduction:Signup' %}">
+    {% csrf_token %}
+    <p class="h4 mb-4">Inscription</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Nom" name="Nom">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Prénom" name="Prénom">
+        </div>
+    </div>
+    <input type="text" class="form-control mb-4" placeholder="Username" name="Username">
+    <input type="email" class="form-control mb-4" placeholder="E-mail" name="Mail">
+    <input type="password" class="form-control mb-4" placeholder="Mot de passe" name="Password">
+    <input type="text" class="form-control mb-4" placeholder="Wilaya" name="Wilaya">
+    <input type="text" class="form-control mb-4" placeholder="Commune" name="Commune">
+    <input type="text" class="form-control mb-4" placeholder="Adresse" name="Adresse">
+    <input type="text" class="form-control mb-4" placeholder="Telephone" name="Telephone">
+    <input type="text" class="form-control mb-4" placeholder="Fax" name="Fax">
+    <button class="btn btn-info my-4 btn-block" type="submit">S'inscrire</button>
+</form>
+
+<!-- ///////////////////Demande devis///////////////// -->
+<form class="text-center border border-light p-5 mt-4 mr-2 ml-2 mb-2" action="#!" style="display: none" >
+
+    <p class="h4 mb-4">Demande de devis</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <!-- First name -->
+            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+            <!-- Last name -->
+            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+        </div>
+    </div>
+    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+        At least 8 characters and 1 digit
+    </small>
+    <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+    <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+        Optional - for two step authentication
+    </small>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
+        <label class="custom-control-label" for="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
+    </div>
+    <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+</form>
+</div>
+</div>
+{% endblock content %}
+<div class="foot" style="background-color: #C38D9E">
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	function ShowAndHide(id1,id2){
+	document.getElementById(id1).style.display="block";
+	document.getElementById(id2).style.display="none";
+}
+    function ShowAndHide1(id1){
+	document.getElementById(id1).style.display="block";
+	document.getElementById("connexform").style.display="none";
+}
+</script>
+</body>
+</html>

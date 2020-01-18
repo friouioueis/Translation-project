@@ -1,0 +1,63 @@
+
+.logo {
+	font-family: roboto-regular;
+	font-size: 3.4vw;
+}
+
+@font-face {
+	font-family: roboto-regular;
+	src: local('roboto-regular'),
+		url('/static/font/roboto-regular.ttf') format("truetype");
+}
+.menu-item {
+	width: 16.5vw;
+	text-align: center;
+	font-size: 20px;
+	font-family: Trebuchet MS;
+}
+
+.carousel-inner img {
+	height: 40vw;
+	width: 10vw;
+}
+body {
+		overflow-x: hidden;
+}
+.blur:hover {
+	filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.forms-display {
+	display: none;
+}
+
+.btn-cnx {
+	padding-right: 15vh;
+	padding-left: 15vh;
+	font-size: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  div.card {
+    width: 25rem;
+  }
+
+}
+
+@media only screen and (max-width: 992px) {
+	a.menu-item {
+		font-size: 15px;
+	}
+}
+.card {
+	width: 40rem;
+}
+.carousel-inner {
+	transition-duration: 3s;
+}
+
+.foot {
+	background-color: #C38D9E;
+	height: 300px;
+}
