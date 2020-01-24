@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load count_template_tag %}
+{% block content %}
+    <div class="row">
+    <div class="col-9">
+        <div class="container">
+            {% comment %}///////////////////////Informations///////////////////////{% endcomment %}
+            <form class="text-center border border-light p-5 mt-3 ml-4 mb-4" id="form"  method="post" style="background-color: #F7F9FB"  action="{% url 'Traduction:modify-client' %}">
+                {% csrf_token %}
+                <p class="h4 mb-4">Informations</p>
+
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <input type="text" class="form-control" value="{{ request.user.Nom }}" name="Nom">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" value="{{ request.user.Prénom }}" name="Prénom">
+                    </div>
+                </div>
+                <input type="text" class="form-control mb-4" value="{{ request.user.username }}" name="Username">
+                <input type="email" class="form-control mb-4" value="{{ request.user.email }}" name="Mail">
+                <input type="password" class="form-control mb-4" placeholder="Nouveau mot de passe" name="Password">
+                <input type="text" class="form-control mb-4" value="{{ request.user.Wilaya }}" name="Wilaya">
+                <input type="text" class="form-control mb-4" value="{{ request.user.Commune }}" name="Commune">
+                <input type="text" class="form-control mb-4" value="{{ request.user.Adresse }}" name="Adresse">
+                <input type="text" class="form-control mb-4" value="{{ request.user.Telephone }}" name="Telephone">
+                <input type="text" class="form-control mb-4" value="{{ request.user.Fax }}" name="Fax">
+                <button class="btn btn-info my-4 btn-block" type="submit">Sauvegarder</button>
+            </form>
+            {# ///////////////////////////////////////Devis//////////////////////////#}
+                <div class="row forms-display" id="devis">
+                    {% for devi in devis %}
+                    <div class="col-6">
+                        {{ devi.traducteur.get_queryset }}
+                    </div>
+                    {% endfor %}
+                </div>
+        {% comment %}////////////////////////////////Traduction/////////////////////////////{% endcomment %}
+            <div id="trad">
+            </div>
+        {% comment %}////////////////////////////////deconnexion/////////////////////////{% endcomment %}
+            <div id="deconnex">
+            </div>
+        </div>
+  </div>
+    <div class="col-3">
+        <div class="list-group mt-3 mr-5 mb-3" id="list-tab" role="tablist">
+      <button class="list-group-item list-group-item-action active" data-toggle="list" onclick="ShowAndHideTrad('form','devis','trad','deconnex')">Informations</button>
+      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('devis','form','trad','deconnex')">Demandes de devis <span class="badge badge-danger badge-pill float-right">{{ request.user|devis_count }}</span></button>
+      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('trad','form','devis','deconnex')">Demandes de traduction <span class="badge badge-danger badge-pill float-right">0</span></button>
+      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('deconnex','form','trad','devis')">Deconnexion</button>
+    </div>
+    </div>
+    </div>
+
+
+<script type="text/javascript">
+function ShowAndHideTrad(id1,id2, id3, id4){
+	document.getElementById(id1).style.display="block";
+	document.getElementById(id2).style.display="none";
+	document.getElementById(id3).style.display="none";
+	document.getElementById(id4).style.display="none";
+}
+</script>
+{% endblock content %}

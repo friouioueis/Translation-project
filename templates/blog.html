@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+    {#        ////// card////////            #}
+{% for article in articles %}
+    <div class="col-12 offset-2">
+	<div class="card pt-4 ml-5 mb-4 mt-2" style="background-color: #F7F9FB">
+     {% if article.image %}
+  <img class="card-img-top" src="{{ article.image.url }}">
+     {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ article.title }}</h5>
+    <p class="card-text">{{ article.Description }}</p>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#firstmodal" >Lire la suite</a>
+  </div>
+    </div>
+    {#    //////////modal///////////////////#}
+    <div class="modal fade" id="firstmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Translatech</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ article.Description }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+    </div>
+{% endblock %}

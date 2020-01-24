@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+            {% for traducteur in traducteurs %}
+                <div class="col">
+                    <div class="card bg-light mt-4 mb-4" style="width: 18rem;">
+                      <div class="card-body">
+                        <h5 class="card-title"><b>{{ traducteur.Nom }} {{ traducteur.Prénom }}</b></h5>
+                        <b>Langues:</b> <br>
+                           {% for langue in traducteur.languages.all %}
+                               {{ langue }}<br>
+                           {% endfor %}
+                      <b>Type:</b>  {{ traducteur.type.title }}
+
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ traducteur.email }}</li>
+                        <li class="list-group-item">{{ traducteur.Telephone }}</li>
+                        <li class="list-group-item">{{ traducteur.Adresse }}</li>
+                      </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<form class="text-center border border-light p-5 mt-2 mr-2 ml-2 mb-2" style="background-color: #F7F9FB" id="inscrformtrad" method="post" enctype="multipart/form-data" action="{% url 'Traduction:SignupTrad' %}">
+    {% csrf_token %}
+    <p class="h4 mb-4">Formulaire de recrutement</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Nom" name="Nom">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Prénom" name="Prénom">
+        </div>
+    </div>
+    <input type="text" class="form-control mb-4" placeholder="Username" name="Username">
+    <input type="email" class="form-control mb-4" placeholder="E-mail" name="Mail">
+    <input type="password" class="form-control mb-4" placeholder="Mot de passe" name="Password">
+    <select multiple class="form-control mb-4" name="language">
+        {% for langue in langues %}
+        <option value="{{ langue }}">{{ langue.title }}</option>
+        {% endfor %}
+    </select>
+    <label for="type">Type des traductions</label>
+    <select  class="form-control mb-4" name="type" id="type">
+        <option value="General">General</option>
+        <option value="Scientifque">Scientifque</option>
+        <option value="Web">Web</option>
+    </select>
+    <div class="form-group">
+    <label for="fichier">Insérer le fichier CV</label>
+    <input type="file" class="form-control-file" id="cv" name="cv">
+  </div>
+    <div class="form-row mb-4">
+        <div class="col">
+            <input type="radio" value="True" name="assermente" onclick="ShowAndHide1('fichier')">  Je suis assermeté
+        </div>
+        <div class="col">
+            <input type="radio" value="False" name="assermente" onclick="ShowAndHide2('fichier')">    je ne suis pas assermenté
+        </div>
+    </div>
+    <div class="form-group" id="fichier" style="display: none">
+    <label for="fichier">Insérer le fichier</label>
+    <input type="file" class="form-control-file" name="fichier_assert">
+  </div>
+    <input type="text" class="form-control mb-4" placeholder="Wilaya" name="Wilaya">
+    <input type="text" class="form-control mb-4" placeholder="Commune" name="Commune">
+    <input type="text" class="form-control mb-4" placeholder="Adresse" name="Adresse">
+    <input type="text" class="form-control mb-4" placeholder="Telephone" name="Telephone">
+    <input type="text" class="form-control mb-4" placeholder="Fax" name="Fax">
+    <button class="btn btn-info my-4 btn-block" type="submit">S'inscrire</button>
+</form>
+</div>
+{% endblock %}

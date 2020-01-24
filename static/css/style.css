@@ -15,6 +15,10 @@
 	font-size: 20px;
 	font-family: Trebuchet MS;
 }
+.radio-buttons {
+	margin-left: 70vh;
+}
+
 
 .carousel-inner img {
 	height: 40vw;
@@ -30,6 +34,10 @@ body {
 
 .forms-display {
 	display: none;
+}
+
+.forms-display1 {
+	display: block;
 }
 
 .btn-cnx {
@@ -55,9 +63,4 @@ body {
 }
 .carousel-inner {
 	transition-duration: 3s;
-}
-
-.foot {
-	background-color: #C38D9E;
-	height: 300px;
 }
