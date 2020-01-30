@@ -27,39 +27,131 @@
                 <input type="text" class="form-control mb-4" value="{{ request.user.Fax }}" name="Fax">
                 <button class="btn btn-info my-4 btn-block" type="submit">Sauvegarder</button>
             </form>
+        </div>
             {# ///////////////////////////////////////Devis//////////////////////////#}
                 <div class="row forms-display" id="devis">
                     {% for devi in devis %}
-                    <div class="col-6">
-                        {{ devi.traducteur.get_queryset }}
-                    </div>
+                        <div class="col mt-4 mb-2" style="margin-left: 50%">
+                        <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <h5 class="card-title">
+                                {% for trad in devi.traducteur.all %}
+                                    {{ trad.Nom }} {{ trad.Prénom }}
+                                {% endfor %}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><span>Prix:</span>
+                                {% ifequal devi.price 0 %}
+                                    N/A
+                                    {% else %}
+                                {{ devi.price }} DA
+                            {% endifequal %}
+                            </h6>
+                            <p class="card-text"><span>Type: </span>{{ devi.type }}</p>
+                          {% if devi.is_valid == False %}
+                            <p class="card-text" style="color: red">
+                                <b>Votre demande a été refusé par le traducteur</b>
+                              </p>
+                           {% endif %}
+                            <p class="card-text"><span>le fichier à traduire:</span> <a href="{{ devi.fichier.url }}" target="_blank">{{ devi.fichier.url }}</a></p>
+                            <a href="{% url 'Traduction:delete_devis' pk=devi.id %}"><button class="btn btn-danger mr-4">Supprimer</button></a>
+                          {% if devi.is_approved and devi.is_valid %}
+                            <a href="{% url 'Traduction:demand_trad' pk=devi.id %}"><button class="btn btn-warning">Demander</button></a>
+                          {% else %}
+                             {% if devi.is_valid %}
+                            <a href="#" style="pointer-events: none"><button class="btn btn-warning disabled">Demander</button></a>
+                                 {% endif %}
+                          {% endif %}
+                          </div>
+                        </div>
+                        </div>
                     {% endfor %}
                 </div>
         {% comment %}////////////////////////////////Traduction/////////////////////////////{% endcomment %}
-            <div id="trad">
-            </div>
+            <div class="row forms-display" id="trad">
+                    {% for trad in trads %}
+                        <div class="col mt-4 mb-2" style="margin-left: 50%">
+                        <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <h5 class="card-title">
+                                    {% for traduct in trad.traducteur.all %}
+                                    {{ traduct.Nom }} {{ traduct.Prénom }}
+                                {% endfor %}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><span>Prix:</span>
+                                {{ trad.price }} DA
+                            </h6>
+                            <h6 class="card-subtitle mb-2"><span>email:</span>
+                                {{ trad.client_email }}
+                            </h6>
+                            <p class="card-text"><span>Type: </span>{{ trad.type }}</p>
+                            <p class="card-text"><span>le fichier à traduire:</span> <a href="{{ trad.fichier.url }}" target="_blank">{{ trad.fichier.url }}</a></p>
+                            {% if trad.is_done %}
+                             <p class="card-text"><span>le fichier traduisé:</span> <a href="{{ trad.fichi_trad.url }}" target="_blank">{{ trad.fichi_trad.url }}</a></p>
+                            {% endif %}
+                             <a href="{% url 'Traduction:delete_devis' pk=trad.id %}"><button class="btn btn-danger mr-4">Supprimer</button></a>
+                          {% if trad.is_done %}
+                              <button class="btn btn-primary" data-toggle="modal" data-target="#tradmodal">Noter</button>
+                          {% else %}
+                              <a style="pointer-events: none"><button class="btn btn-warning disabled">Noter</button></a>
+                          {% endif %}
+                          </div>
+                        </div>
+                        </div>
+                                {#  ///////////////////////////////////////Note Modal/////////////////////////////////////#}
+                        <div class="modal fade" id="tradmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Prix de traduction</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                 <form method="post" action="{% url 'Traduction:noter_trad' pk=trad.id %}">
+                                        {% csrf_token %}
+                                      <div class="form-group">
+                                        <label for="Price" class="col-form-label">Note de Traduction:</label>
+                                        <input type="text" class="form-control-file align-center"  name="note" placeholder="Noter sur 10">
+                                       </div>
+                                        <button type="submit" class="btn btn-primary">Noter</button>
+                                  </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                    {% endfor %}
+                </div>
         {% comment %}////////////////////////////////deconnexion/////////////////////////{% endcomment %}
-            <div id="deconnex">
+    <div id="deconnex">
+                <div class="modal fade" id="deconnexion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Deconnexion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="card-text">Etes vous sure de déconnecter?</p>
+                      </div>
+                      <div class="modal-footer">
+                          <a href="{% url 'Traduction:Logout' %}" style="color: inherit; text-decoration: none"><button type="button" class="btn btn-primary">oui</button></a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
-        </div>
   </div>
     <div class="col-3">
         <div class="list-group mt-3 mr-5 mb-3" id="list-tab" role="tablist">
       <button class="list-group-item list-group-item-action active" data-toggle="list" onclick="ShowAndHideTrad('form','devis','trad','deconnex')">Informations</button>
-      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('devis','form','trad','deconnex')">Demandes de devis <span class="badge badge-danger badge-pill float-right">{{ request.user|devis_count }}</span></button>
-      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('trad','form','devis','deconnex')">Demandes de traduction <span class="badge badge-danger badge-pill float-right">0</span></button>
-      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('deconnex','form','trad','devis')">Deconnexion</button>
+      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('devis','form','trad','deconnex')">Devis <span class="badge badge-danger badge-pill float-right">{{ request.user|devis_count }}</span></button>
+      <button class="list-group-item list-group-item-action" data-toggle="list" onclick="ShowAndHideTrad('trad','form','devis','deconnex')">Traductions <span class="badge badge-danger badge-pill float-right">{{ request.user|trad_count }}</span></button>
+      <button class="list-group-item list-group-item-action"  data-toggle="modal" data-target="#deconnexion" onclick="ShowAndHideTrad('deconnex','form','trad','devis')">Deconnexion</button>
     </div>
     </div>
     </div>
-
-
-<script type="text/javascript">
-function ShowAndHideTrad(id1,id2, id3, id4){
-	document.getElementById(id1).style.display="block";
-	document.getElementById(id2).style.display="none";
-	document.getElementById(id3).style.display="none";
-	document.getElementById(id4).style.display="none";
-}
-</script>
 {% endblock content %}

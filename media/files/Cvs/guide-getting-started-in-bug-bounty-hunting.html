@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<title>Guide 001 |Getting Started in Bug Bounty Hunting.. &#8211; Muhammad Khizer Javed</title>
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content="WordPress 5.3" />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Muhammad Khizer Javed &raquo; Feed" href="https://whoami.securitybreached.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Muhammad Khizer Javed &raquo; Comments Feed" href="https://whoami.securitybreached.org/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Muhammad Khizer Javed &raquo; Guide 001 |Getting Started in Bug Bounty Hunting.. Comments Feed" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/feed/" />
+<link rel="pingback" href="https://whoami.securitybreached.org/xmlrpc.php" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/whoami.securitybreached.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://whoami.securitybreached.org/wp-includes/css/dist/block-library/style.min.css?ver=5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='omega-style-css'  href='https://whoami.securitybreached.org/wp-content/themes/me/style.css?ver=5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='me-google-fonts-css'  href='//fonts.googleapis.com/css?family=Alegreya:400|Lato:400' type='text/css' media='all' />
+<!-- Inline jetpack_facebook_likebox -->
+<style id='jetpack_facebook_likebox-inline-css' type='text/css'>
+.widget_facebook_likebox {
+	overflow: hidden;
+}
+
+</style>
+<link rel='stylesheet' id='social-logos-css'  href='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://whoami.securitybreached.org/wp-content/plugins/jetpack/css/jetpack.css?ver=7.9.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20191011'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/wp-hide-post/public/js/wp-hide-post-public.js?ver=2.0.10'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/themes/me/js/init.js?ver=5.3'></script>
+<link rel='https://api.w.org/' href='https://whoami.securitybreached.org/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://whoami.securitybreached.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://whoami.securitybreached.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='WHO AM I? And My Experiments with Hacking?' href='https://whoami.securitybreached.org/2017/10/09/who-am-i-and-my-experiments-with-hacking/' />
+<link rel="canonical" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/" />
+<link rel='shortlink' href='https://wp.me/p9gfbP-2l' />
+<link rel="alternate" type="application/json+oembed" href="https://whoami.securitybreached.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwhoami.securitybreached.org%2F2019%2F06%2F03%2Fguide-getting-started-in-bug-bounty-hunting%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://whoami.securitybreached.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwhoami.securitybreached.org%2F2019%2F06%2F03%2Fguide-getting-started-in-bug-bounty-hunting%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//widgets.wp.com'/>
+<link rel='dns-prefetch' href='//s0.wp.com'/>
+<link rel='dns-prefetch' href='//0.gravatar.com'/>
+<link rel='dns-prefetch' href='//1.gravatar.com'/>
+<link rel='dns-prefetch' href='//2.gravatar.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style>	<!--[if lt IE 9]>
+	<script src="https://whoami.securitybreached.org/wp-content/themes/omega/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+
+<style type="text/css" id="custom-css"></style>
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Guide 001 |Getting Started in Bug Bounty Hunting.." />
+<meta property="og:url" content="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/" />
+<meta property="og:description" content="A Noobs Guide to Getting Started in Bug Bounty Hunting | Muhammad Khizer Javed, whoami.securitybreached.org | aslicybersecurity.com | @KHIZER_JAVED47 No one will tell you anything or everything abo…" />
+<meta property="article:published_time" content="2019-06-03T03:40:40+00:00" />
+<meta property="article:modified_time" content="2019-06-03T03:40:46+00:00" />
+<meta property="og:site_name" content="Muhammad Khizer Javed" />
+<meta property="og:image" content="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?fit=1200%2C593&amp;ssl=1" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="593" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@KHIZER_JAVED47" />
+<meta name="twitter:text:title" content="Guide 001 |Getting Started in Bug Bounty Hunting.." />
+<meta name="twitter:image" content="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?fit=1200%2C593&#038;ssl=1&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="icon" href="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/06/cropped-logo-finalK.png?fit=32%2C32&#038;ssl=1" sizes="32x32" />
+<link rel="icon" href="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/06/cropped-logo-finalK.png?fit=192%2C192&#038;ssl=1" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/06/cropped-logo-finalK.png?fit=180%2C180&#038;ssl=1" />
+<meta name="msapplication-TileImage" content="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/06/cropped-logo-finalK.png?fit=270%2C270&#038;ssl=1" />
+</head>
+<body class="wordpress ltr child-theme y2019 m11 d25 h19 monday logged-out custom-header singular singular-post singular-post-145" dir="ltr" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<div class="site-container">
+	<header id="header" class="site-header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader"><div class="site-avatar"><a href="https://whoami.securitybreached.org/"><img alt="" src="https://whoami.securitybreached.org/wp-content/uploads/2017/10/AAEAAQAAAAAAAA2NAAAAJDUxYzIxM2EyLTJkNDYtNDBmNy05NzYzLTljZDdiZTI1ODA2NQ.jpg" /></a></div><div class="wrap"><div class="title-area"><div itemscope itemtype="http://schema.org/Organization" class="site-title"><a itemprop="url" href="https://whoami.securitybreached.org" title="Muhammad Khizer Javed" rel="home"><img itemprop="logo" alt="Muhammad Khizer Javed" src="https://whoami.securitybreached.org/wp-content/uploads/2019/06/logo-finalK.png"/></a></div><h3 class="site-description"><span>||||||||| Hacking? |||||||||  Sometimes, HACKING is Just someone spending more time on something than anyone else might reasonably expect</span></h3></div><nav id="navigation" class="nav-primary" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">	
+	<div class="wrap"><a href="#" id="menu-icon" class="menu-icon"><span></span></a><ul class="menu omega-nav-menu menu-primary"><li class="page_item page-item-24"><a href="https://whoami.securitybreached.org/blog/">Blog!</a></li><li class="page_item page-item-28"><a href="https://whoami.securitybreached.org/bugcrowd-profile/">Bugcrowd Profile?</a></li><li class="page_item page-item-26"><a href="https://whoami.securitybreached.org/hackerone-profile/">HackerOne Profile?</a></li></ul></div></nav><!-- .nav-primary --></div></header><!-- .site-header -->	<div class="site-inner">
+		<div class="wrap"><main class="content" id="content" role="main" itemprop="mainEntityOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
+			<article id="post-145" class="entry post publish author-babayaga47 post-145 format-standard has-post-thumbnail category-tips post_tag-aslicybersecurity post_tag-bug-bounty-hunting post_tag-bug-hunting post_tag-bugbounties post_tag-bugbountyhunting post_tag-bugcrowd post_tag-cyber-security post_tag-guide-to-bugbounty post_tag-hackerone post_tag-infosec" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost"><div class="entry-wrap">
+			<header class="entry-header">	<h1 class="entry-title" itemprop="headline">Guide 001 |Getting Started in Bug Bounty Hunting..</h1>
+<div class="entry-meta">
+	<time class="entry-time" datetime="2019-06-03T03:40:40+00:00" itemprop="datePublished" title="Monday, June 3, 2019, 3:40 am">June 3, 2019</time>
+	<span class="entry-comments-link"> / <a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comments">14 Comments</a></span>	</div><!-- .entry-meta --></header><!-- .entry-header -->		
+	<div class="entry-content" itemprop="articleBody">
+
+<p style="font-size:12px"><strong>A Noobs Guide to Getting Started in Bug Bounty Hunting | <a href="https://www.facebook.com/MuhammadKhizerJaved33">Muhammad Khizer Javed</a>, <a href="https://whoami.securitybreached.org/">whoami.securitybreached.org</a> | <a href="https://www.aslicybersecurity.com/">aslicybersecurity.com</a> | <a href="https://twitter.com/KHIZER_JAVED47">@KHIZER_JAVED47</a></strong></p>
+
+
+
+<blockquote style="text-align:center" class="wp-block-quote is-style-large"><p><strong><em>No one will tell you anything or everything about this field, It’s a long strange path but you have to travel it alone with little help from others.</em></strong></p></blockquote>
+
+
+
+<figure class="wp-block-image is-resized"><img data-attachment-id="147" data-permalink="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/guide-featured-image-k/" data-orig-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?fit=1587%2C784&amp;ssl=1" data-orig-size="1587,784" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="guide-featured-image-k" data-image-description="" data-medium-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?fit=300%2C148&amp;ssl=1" data-large-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?fit=700%2C346&amp;ssl=1" src="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?resize=700%2C345&#038;ssl=1" alt="" class="wp-image-147" width="700" height="345" srcset="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?resize=700%2C346&amp;ssl=1 700w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?resize=300%2C148&amp;ssl=1 300w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?resize=768%2C379&amp;ssl=1 768w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?w=1587&amp;ssl=1 1587w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/guide-featured-image-k.png?w=1400&amp;ssl=1 1400w" sizes="(max-width: 700px) 100vw, 700px" data-recalc-dims="1" /></figure>
+
+
+
+<blockquote style="text-align:center" class="wp-block-quote is-style-large"><p>I am still learning more about Bug Bounty Hunting and writing about this as I am learning, is my way of retaining the knowledge. and sharing what i learned so far and from internet.</p></blockquote>
+
+
+
+<p>Bug Bounty Hunting is an exciting field to be in today, To define Bug Bounty in simple wording I’ll day “<strong>Bug Bounty is a reward paid to an Ethical Hacker for identifying and disclosing a potential security bug found in a&nbsp;participant’s&nbsp;Web, Mobile or System.</strong>”. But i hope as you&#8217;re here already you know enough about bug bounty hunting that i don&#8217;t need to define it to get into usual basics. </p>
+
+
+
+<p>Now who am i? i already  wrote a note like this in 2017 at <strong><a href="https://whoami.securitybreached.org/2017/10/09/who-am-i-and-my-experiments-with-hacking/">WHO AM I? And My Experiments with Hacking?</a></strong> It contains some information about me and my experience and a basic guide but it&#8217;s all mixed up and not really in details so i decided to write a new one read it if you like to know a bit about me otherwise i&#8217;ll be moving the resources i shared there to this note with some details. I hope this blog will be helpful to you guys do let me know in comments if i missed something and you would like to add something or have any questions. This Blog contains Resources i have collected from all over the internet and adding them here to make a blog that contains 0-100 about getting started in Bug Bounty i&#8217;ll try my best to mention each place i managed to get the resources from if somethings missed you know how to write a comment under a blog post. peace.\!</p>
+
+
+
+<blockquote class="wp-block-quote"><p>First of all I want you guys to Read The article by Eric Raymond <a rel="noreferrer noopener" href="http://www.catb.org/esr/faqs/hacker-howto.html" target="_blank">http://www.catb.org/esr/faqs/hacker-howto.html</a> <br>For Me It has become standard guideline for Starters. <br>As Mentioned In This Article One of The Most Important Thing You Need to Have If You want Become a Hacker is Attitude!   <br><br><strong>To be a hacker, you have to develop some of these attitudes. But copping an attitude alone won&#8217;t make you a hacker, any more than it will make you a champion athlete or a rock star. Becoming a hacker will take intelligence, practice, dedication, and hard work.Therefore, you have to learn to distrust attitude and respect competence of every kind. Hackers won&#8217;t let posers waste their time, but they worship competence — especially competence at hacking, but competence at anything is valued. Competence at demanding skills that few can master is especially good, and competence at demanding skills that involve mental acuteness, craft, and concentration is best.If you revere competence, you&#8217;ll enjoy developing it in yourself — the hard work and dedication will become a kind of intense play rather than drudgery. That attitude is vital to becoming a hacker.</strong></p></blockquote>
+
+
+
+<h4><strong>What You Should Know Before Starting to learn about Bug Bounty Hunting?</strong></h4>
+
+
+
+<figure class="wp-block-image"><img data-attachment-id="156" data-permalink="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/roughroadahead/" data-orig-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?fit=1200%2C871&amp;ssl=1" data-orig-size="1200,871" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="roughroadahead" data-image-description="" data-medium-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?fit=300%2C218&amp;ssl=1" data-large-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?fit=700%2C508&amp;ssl=1" src="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?resize=700%2C508&#038;ssl=1" alt="" class="wp-image-156" srcset="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?resize=700%2C508&amp;ssl=1 700w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?resize=300%2C218&amp;ssl=1 300w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?resize=768%2C557&amp;ssl=1 768w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/roughroadahead.jpeg?w=1200&amp;ssl=1 1200w" sizes="(max-width: 700px) 100vw, 700px" data-recalc-dims="1" /><figcaption>It&#8217;s Actually a Rough Road Ahead&#8230; ~Khizer</figcaption></figure>
+
+
+
+<blockquote style="text-align:center" class="wp-block-quote"><p><strong>I&#8217;ll be writing this blog in 3 Major Phases were i&#8217;ll break down things to be as easy as possible, because  the major audience in my mind right now is absolute beginners, or ones who have already tried learning or working but failed for some reason&#8230; </strong></p></blockquote>
+
+
+
+<h2><strong>Phase #01</strong></h2>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://i0.wp.com/ftp.osuosl.org/pub/aqsis/images/phase/phase1.png?w=700" alt="" data-recalc-dims="1"/></figure></div>
+
+
+
+<ul><li><strong>Phase 01 is Based on Basics of Networks communication stuff, Programming &amp; Automation.</strong></li></ul>
+
+
+
+<p>Well first of all to work on anything you need to know some very basic thing, that includes how a system works and how can you can make changes to it. Now let&#8217;s start from very basics&#8230; </p>
+
+
+
+<p style="text-align:left" class="has-medium-font-size"><strong>Web, HTTP &amp; Network Basics:</strong></p>
+
+
+
+<p><strong>Web:</strong><br>Just for overview you should give a read to one of these<br><br>&gt;<a href="https://www.tutorialspoint.com/web_developers_guide/web_basic_concepts.htm">https://www.tutorialspoint.com/web_developers_guide/web_basic_concepts.htm</a><br>&gt;<a href="https://developers.google.com/web/fundamentals/security/">https://developers.google.com/web/fundamentals/security/</a><br>&gt;<a href="http://www.alphadevx.com/a/7-The-Basics-of-Web-Technologies">http://www.alphadevx.com/a/7-The-Basics-of-Web-Technologies</a><br>&gt;<a href="http://www.cs.kent.edu/~svirdi/Ebook/wdp/ch01.pdf">http://www.cs.kent.edu/~svirdi/Ebook/wdp/ch01.pdf</a><strong><br></strong><br><strong>HTTP:<br></strong>Communication is the key to success thus in order to learn something works  on in our case how an application works and what it&#8217;s flow is we need to learn how it communicates with you. and the Most basic thing i can think of is knowing about HTTP. Mentioning a few places you should definitely  visit to get an idea about HTTP.<br><br>&gt; <a href="https://www.w3.org/Protocols/">https://www.w3.org/Protocols/</a><br>&gt; <a href="https://www.w3schools.com/whatis/whatis_http.asp">https://www.w3schools.com/whatis/whatis_http.asp</a><br>&gt; <a href="https://www.tutorialspoint.com/http/http_status_codes.htm">https://www.tutorialspoint.com/http/http_status_codes.htm</a> <br>&gt; <a href="https://www.tutorialspoint.com/http/http_url_encoding.htm">https://www.tutorialspoint.com/http/http_url_encoding.htm</a> <br>&gt; <a href="https://www.tutorialspoint.com/http/http_requests.htm">https://www.tutorialspoint.com/http/http_requests.htm</a><br>&gt; <a href="https://www.tutorialspoint.com/http/http_responses.htm">https://www.tutorialspoint.com/http/http_responses.htm</a> <br>&gt; <a href="https://www.hacker101.com/sessions/web_in_depth">https://www.hacker101.com/sessions/web_in_depth</a><br><br>What You&#8217;ll basically learn from these is about HTTP Protocols, HTTP Requests, Response, Status Codes, Encoding/Decoding, and From the last URL you&#8217;ll get to learn it under security perspective so you&#8217;ll get to learn SOP, Cookie, MIEM &amp; HTML Pharising. These will definitely help you later with Web app testing and stuff.<br><br><strong>Networking:</strong><br>A basic understanding of networking is important for anyone who&#8217;s into computer. So a few resources to learn the basics of Networking.<br><br>&gt;<a href="https://commotionwireless.net/docs/cck/networking/learn-networking-basics/">https://commotionwireless.net/docs/cck/networking/learn-networking-basics/</a><br>&gt; <a href="https://commotionwireless.net/docs/cck/networking/learn-networking-basics/">https://commotionwireless.net/docs/cck/networking/learn-networking-basics/</a><br>&gt; <a href="https://www.slideshare.net/variwalia/basic-to-advanced-networking-tutorials">https://www.slideshare.net/variwalia/basic-to-advanced-networking-tutorials</a><br>&gt; <a href="https://www.cisco.com/c/en/us/solutions/small-business/resource-center/networking/networking-basics.html">https://www.cisco.com/c/en/us/solutions/small-business/resource-center/networking/networking-basics.html</a><br>&gt; <a href="http://www.penguintutor.com/linux/basic-network-reference">http://www.penguintutor.com/linux/basic-network-reference</a><br>&gt; <a href="https://www.utilizewindows.com/list-of-common-network-port-numbers/">https://www.utilizewindows.com/list-of-common-network-port-numbers/</a><br>&gt; <a href="https://code.tutsplus.com/tutorials/an-introduction-to-learning-and-using-dns-records--cms-24704">https://code.tutsplus.com/tutorials/an-introduction-to-learning-and-using-dns-records&#8211;cms-24704</a><br>&gt; <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-networking-terminology-interfaces-and-protocols">https://www.digitalocean.com/community/tutorials/an-introduction-to-networking-terminology-interfaces-and-protocols</a><br><br><strong>Linux Commands:</strong><br>&gt;<a href="http://linuxcommand.org/">http://linuxcommand.org/</a></p>
+
+
+
+<figure class="wp-block-image"><img data-attachment-id="163" data-permalink="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/basic_linux_commands/" data-orig-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?fit=823%2C932&amp;ssl=1" data-orig-size="823,932" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="basic_linux_commands" data-image-description="" data-medium-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?fit=265%2C300&amp;ssl=1" data-large-file="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?fit=700%2C793&amp;ssl=1" src="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?fit=700%2C793&amp;ssl=1" alt="" class="wp-image-163" srcset="https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?w=823&amp;ssl=1 823w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?resize=265%2C300&amp;ssl=1 265w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?resize=768%2C870&amp;ssl=1 768w, https://i0.wp.com/whoami.securitybreached.org/wp-content/uploads/2019/05/basic_linux_commands.png?resize=700%2C793&amp;ssl=1 700w" sizes="(max-width: 700px) 100vw, 700px" /></figure>
+
+
+
+<p><br>What You&#8217;ll learn from these are basics of Networking, TCP/ID, DNS, Network terminologies &amp; Linux commands etc. These will definitely help you later with Recon Process. </p>
+
+
+
+<blockquote style="text-align:center" class="wp-block-quote is-style-large"><p><strong>Learn to make it; then break it!</strong></p></blockquote>
+
+
+
+<p class="has-medium-font-size"><strong>Programming/Coding:</strong></p>
+
+
+
+<p>To be a Good Hacker you don&#8217;t really need to be a Good Programmer but it&#8217;s always Good to cover this before going in Any form of Computer Hacking or Bug Bounty in general. Also Sometimes It increases your chances of successfully identifying and exploiting a vulnerability and also you may need code to escalate a bug with a low/medium severity to high/critical. <br>I Personally suffered  for two year in bug bounties because in many cases i couldn&#8217;t really understands what the particular code means, couldn&#8217;t exploit an issue properly or couldn&#8217;t even code in general, and I&#8217;m, still trying my best to catch up to speed so i&#8217;ll suggest you guys not to skip these parts and go directly towards Bug Bounties.<br>Now I&#8217;ll suggest a few languages that one should properly have basic to medium level knowledge about and keep advancing it.<br><br><strong>HTML:<br></strong>> <a href="https://www.w3schools.com/html/">https://www.w3schools.com/html/</a><br>> <a href="https://www.codecademy.com/learn/learn-html">https://www.codecademy.com/learn/learn-html</a><br>> <a href="https://learn.shayhowe.com/advanced-html-css/">https://learn.shayhowe.com/advanced-html-css/</a><br>> <a href="https://htmldog.com/guides/html/advanced/">https://htmldog.com/guides/html/advanced/</a><br><br><strong>PHP: <br></strong>> <a href="https://www.w3schools.com/php/">https://www.w3schools.com/php/</a><br>> <a href="https://stackify.com/learn-php-tutorials/">https://stackify.com/learn-php-tutorials/</a><br>> <a href="https://www.codecademy.com/learn/learn-php">https://www.codecademy.com/learn/learn-php</a><br>> <a href="https://www.guru99.com/php-tutorials.html">https://www.guru99.com/php-tutorials.html</a><br>> <a href="https://www.codecademy.com/learn/paths/web-development">https://www.codecademy.com/learn/paths/web-development</a><br><br><strong>JavaScript:</strong><br>> <a href="https://www.youtube.com/watch?v=PkZNo7MFNFg">https://www.youtube.com/watch?v=PkZNo7MFNFg</a><br>> <a href="https://www.codecademy.com/learn/introduction-to-javascript">https://www.codecademy.com/learn/introduction-to-javascript</a><br>> <a href="https://learnjavascript.today/">https://learnjavascript.today/</a><br>> <a href="https://www.thebalancecareers.com/learn-javascript-online-2071405">https://www.thebalancecareers.com/learn-javascript-online-2071405</a><br><br><strong>SQL(Structured Query Language):<br></strong>> <a href="https://www.youtube.com/watch?v=HXV3zeQKqGY">https://www.youtube.com/watch?v=HXV3zeQKqGY</a><br>> <a href="https://www.w3schools.com/sql/">https://www.w3schools.com/sql/</a><br>> <a href="https://www.codecademy.com/learn/learn-sql">https://www.codecademy.com/learn/learn-sql</a><br>> <a href="http://www.sqlcourse.com/">http://www.sqlcourse.com/</a><br><br><strong>C/C++</strong><br>><a href="https://www.youtube.com/watch?v=vLnPwxZdW4Y">https://www.youtube.com/watch?v=vLnPwxZdW4Y</a><br>><a href="https://www.learncpp.com/">https://www.learncpp.com/</a><br>><a href="https://www.codecademy.com/learn/learn-c-plus-plus">https://www.codecademy.com/learn/learn-c-plus-plus</a><br>><a href="https://www.sololearn.com/Course/CPlusPlus/">https://www.sololearn.com/Course/CPlusPlus/</a><br>><a href="https://www.learn-c.org/">https://www.learn-c.org/</a><br>><a href="https://www.youtube.com/watch?v=KJgsSFOSQv0">https://www.youtube.com/watch?v=KJgsSFOSQv0</a><br><br><strong>Java:<br>></strong><a href="https://www.codecademy.com/learn/learn-java">https://www.codecademy.com/learn/learn-java</a><br>><a href="https://www.geeksforgeeks.org/java-how-to-start-learning-java/">https://www.geeksforgeeks.org/java-how-to-start-learning-java/</a><br>><a href="https://www.learnjavaonline.org/">https://www.learnjavaonline.org/</a><br>><a href="https://www.youtube.com/watch?v=grEKMHGYyns">https://www.youtube.com/watch?v=grEKMHGYyns</a><br><strong><br></strong>What You&#8217;ll learn from them is not just Programming languages but the proper way of web and systems to communicate that you gonna test, I&#8217;m no expert or even a starter i&#8217;m just a learner in Programming so sharing the resources i&#8217;m currently following. Like you know XSS, HTML injections, PHP Injections, SQLi etc and Many other vulnerabilities you can&#8217;t exploit properly unless you know the code that runs behind and knows exactly how to communicate so that&#8217;s why is learning them are important to get a good start.</p>
+
+
+
+<p style="text-align:left" class="has-medium-font-size"><strong>Adding Automation to your work:</strong><br></p>
+
+
+
+<p style="text-align:center"><strong><em>&#8220;Never send a human to do a machine’s job&#8221; <br></em></strong></p>
+
+
+
+<p>Well As you know sometimes you need to so your work faster and more efficiently so the best way i think for it is Automating your work not gonna get to much into depth of it as it&#8217;s something i myself is just getting familiar about.. so You can read more about Importance of Automation for a Bug Bounty Hunter at <br><a href="https://pentester.land/conference-notes/2018/07/25/bug-bounty-talks-2017-automation-for-bug-hunters.html">https://pentester.land/conference-notes/2018/07/25/bug-bounty-talks-2017-automation-for-bug-hunters.html</a><br>I&#8217;ll just share here my notes for what languages i&#8217;m following and looking forward to be good at..<br><br><strong>Python:</strong><br>&gt; <a href="https://realpython.com/">https://realpython.com/</a><br>&gt; <a href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a><br>&gt;<a href="https://drive.google.com/drive/u/0/folders/0ByWO0aO1eI_MT1E1NW91VlJ2TVk?fbclid=IwAR35WNZwBQudINaZ10I5ZA2YDQdtNXSEwRyEiLEK91_csJ7ekN1ut7AQNeQ">https://drive.google.com/drive/u/0/folders/0ByWO0aO1eI_MT1E1NW91VlJ2TVk?fbclid=IwAR35WNZwBQudINaZ10I5ZA2YDQdtNXSEwRyEiLEK91_csJ7ekN1ut7AQNeQ</a><br><br><strong>Bash:</strong><br>&gt; <a href="https://www.tutorialspoint.com/unix/shell_scripting.htm">https://www.tutorialspoint.com/unix/shell_scripting.htm</a><br>&gt; <a href="https://www.learnshell.org/">https://www.learnshell.org/</a><br>&gt; <a href="https://medium.com/quick-code/top-tutorials-to-learn-shell-scripting-on-linux-platform-c250f375e0e5">https://medium.com/quick-code/top-tutorials-to-learn-shell-scripting-on-linux-platform-c250f375e0e5</a><br><br><strong>Ruby:</strong><br>&gt; <a href="https://www.learnrubyonline.org/">https://www.learnrubyonline.org/</a><br>&gt; <a href="https://www.codecademy.com/learn/learn-ruby">https://www.codecademy.com/learn/learn-ruby</a><br><br><strong>Golang:</strong><br>&gt; <a href="https://tour.golang.org/welcome/1">https://tour.golang.org/welcome/1</a><br>&gt; <a href="https://www.udemy.com/learn-go-the-complete-bootcamp-course-golang/">https://www.udemy.com/learn-go-the-complete-bootcamp-course-golang/</a><br><br>What You&#8217;ll learn from these is to code your own tools and understand many other common tools and modify them according to your needs. Ofc one can&#8217;t learn all these but should try to get grip on one he likes and get to understand others.</p>
+
+
+
+<p>So Till Here I&#8217;ll say you already knew all the basics, was good around PHP, JS &amp; HTML stuff &amp; also was good around Scripting &amp; SQL or maybe learned a bit or these and gave it a good time i&#8217;ll say a fews weeks maybe&#8230; Then Congrats you have already gone through <strong>Phase #01</strong> This means that You have done 39% Of Learning Work towards being a good Bug Hunter/ Ethical  Hacker.. Just keep a practicing i myself is still learning this phase because 4 years ago when i started i skipped this part for no reason and then had to see many things differently so i hope you guys won’t have an issue if you go through the First Phase easily.   </p>
+
+
+
+<h2><strong>Phase #02</strong></h2>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://itsbenfuego.files.wordpress.com/2012/06/phase2.png?w=700" alt="" data-recalc-dims="1"/></figure></div>
+
+
+
+<ul><li><strong>Phase 02 is Based on Learning about Vulnerabilities, Resources to follow to learn them, Places to practice &amp; Tools etc</strong>.</li></ul>
+
+
+
+<blockquote style="text-align:center" class="wp-block-quote"><p><strong><em>“Being a hacker is lots of fun, but it’s a kind of fun that takes lots of effort. The effort takes motivation.”</em></strong></p></blockquote>
+
+
+
+<p>Now let&#8217;s start with basic learning about InfoSec the first and really most important step would be to choose a proper initial path that you are going to start learning. Choosing a right path to start in Bug Bounty is very important. It totally depends upon your interest, like some people choose Web Application path first coz it&#8217;s easy to learn and go through than mobile and others&#8230; (<em><strong>Some of the resources are moved here from my old blog that&#8217;s i&#8217;m going to remove but these are updated and properly arranged by my experience</strong></em>)<br><br>I&#8217;ll focus on Web, &amp; Mobile Here coz this is what my interest is.</p>
+
+
+
+<p>Before I add anything else i&#8217;ll suggest You to actually go through <br><br><strong>Hacker101 By <a href="https://www.hackerone.com/">HackerOne</a></strong>  <a href="https://www.hacker101.com/">https://www.hacker101.com/</a><br>And <br><strong><a href="https://www.bugcrowd.com/">Bugcrowd</a> University</strong> <a href="https://www.bugcrowd.com/hackers/bugcrowd-university/">https://www.bugcrowd.com/hackers/bugcrowd-university/</a><br><br>Both of these contains Huge list of resources and lectures that can help you in even a better way than many of us can&#8217;t but as you guys are following this as well so i decided to add them here also.</p>
+
+
+
+<h2><strong>Web App Security:</strong></h2>
+
+
+
+<p>Before I Suggest you what to Learn first if you follow my suggested path l&#8217;ll like to tell you some ways you can practice your skills..</p>
+
+
+
+<p><strong>CTF(Capture The Flag):</strong><br>Now to practice for Bug Bounties you can participate in CTF challenges. Just like the name suggests &#8220;Capture The Flag&#8221; there are several challenges for you to solve which deals with real-world vulnerabilities. The more you practice on these challenges the more you will learn about the different technologies required to break into an application or a system.</p>
+
+
+
+<p>For Web App I&#8217;ll suggest you guys to read the following books &amp; guides first<br><br>&gt;<a href="https://www.packtpub.com/networking-and-servers/mastering-modern-web-penetration-testing">https://www.packtpub.com/networking-and-servers/mastering-modern-web-penetration-testing</a><br>&gt;<a href="https://www.amazon.com/Hackers-Underground-Handbook-secure-systems/dp/1451550189">https://www.amazon.com/Hackers-Underground-Handbook-secure-systems/dp/1451550189</a><br>&gt;<a href="https://leanpub.com/web-hacking-101">https://leanpub.com/web-hacking-101</a><br>&gt;<a href="https://www.amazon.com/gp/product/1593275641/">https://www.amazon.com/gp/product/1593275641/</a><br>&gt;<a href="https://www.amazon.com/gp/product/1512214566/">https://www.amazon.com/gp/product/1512214566/</a><br>&gt;<a href="https://www.amazon.com/Tangled-Web-Securing-Modern-Applications-ebook/dp/B006FZ3UNI/">https://www.amazon.com/Tangled-Web-Securing-Modern-Applications-ebook/dp/B006FZ3UNI/</a></p>
+
+
+
+<p>By Reading these books you will get a good knowledge about Web App pentesting &amp; Security testing in general and in depth.<br><br>In addition to these Books i&#8217;ll suggest you guys should really give good time reading and understanding OWASP Testing Guide &amp; OWASP Top 10 Vulnerabilities from 2010-2017<br><br><strong>OWASP Testing project:<br></strong>&gt;<a href="https://www.owasp.org/index.php/OWASP_Testing_Project">https://www.owasp.org/index.php/OWASP_Testing_Project</a></p>
+
+
+
+<p><strong>OWASP Top 10 Project:<br></strong>&gt;<a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#OWASP_Top_10_for_2010">https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#OWASP_Top_10_for_2010</a><br>&gt;<a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#OWASP_Top_10_for_2013">https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#OWASP_Top_10_for_2013</a><br>&gt;<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf">https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf</a></p>
+
+
+
+<p>Adding a Few basic Pdfs for you guys to go though and save locally to you can keep it revised and keep learning from them.. i&#8217;ll say they gonna help you almost a hundred percent of the time. So do give these a good time<br><br>> <strong>Kali linux Revealed </strong><a href="https://docs.kali.org/pdf/kali-book-en.pdf">https://docs.kali.org/pdf/kali-book-en.pdf</a><br>> <strong>Nmap Cheat Sheet</strong>  <a href="https://s3-us-west-2.amazonaws.com/stationx-public-download/nmap_cheet_sheet_0.6.pdf">https://s3-us-west-2.amazonaws.com/stationx-public-download/nmap_cheet_sheet_0.6.pdf</a><br>> <strong>Metasploit Cheat Sheet: </strong><a href="https://www.sans.org/security-resources/sec560/misc_tools_sheet_v1.pdf">https://www.sans.org/security-resources/sec560/misc_tools_sheet_v1.pdf</a></p>
+
+
+
+<p>Now by this point i&#8217;ll say You have done Good enough research and given good time to practice and learn that you can jump into a Bug Bounty Program to test in real life environment outside CTF, or test environments. <br>So you can happily jump to the pages at<br><br><a href="https://bugcrowd.com/programs">https://bugcrowd.com/programs</a> <br><a href="https://hackerone.com/directory">https://hackerone.com/directory</a><br><br>And Select a Program But I&#8217;ll suggest you to read till the end. </p>
+
+
+
+<p>Following all of them books, testing guides you might have an idea of vulnerabilities so i&#8217;ll name a few common ones and try to give good reference to learn them easily.</p>
+
+
+
+<h3>Cross-Site Request Forgery (CSRF)</h3>
+
+
+
+<p>Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they&#8217;re currently authenticated.<br><br><strong>References to read:</strong> <br><br>&gt;<a href="https://www.imperva.com/learn/application-security/csrf-cross-site-request-forgery/?utm_campaign=Incapsula-moved">https://www.imperva.com/learn/application-security/csrf-cross-site-request-forgery/?utm_campaign=Incapsula-moved</a><br>&gt;<a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)</a><br>&gt;<a href="https://www.netsparker.com/blog/web-security/csrf-cross-site-request-forgery/">https://www.netsparker.com/blog/web-security/csrf-cross-site-request-forgery/</a><br><br><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://medium.com/bugbountywriteup/account-take-over-vulnerability-in-google-acquisition-famebit-e93b1a0a7af9">CSRF Account Takeover famebit</a> by Hassan Khan</li><li><a href="http://yasserali.com/hacking-paypal-accounts-with-one-click/">Hacking PayPal Accounts with one click (Patched)</a>&nbsp;by Yasser Ali</li><li><a href="https://hackerone.com/reports/100820">Add tweet to collection CSRF</a>&nbsp;by vijay kumar</li><li><a href="http://philippeharewood.com/facebookmarketingdevelopers-com-proxies-csrf-quandry-and-api-fun/">Facebookmarketingdevelopers.com: Proxies, CSRF Quandry and API Fun</a>&nbsp;by phwd</li><li><a href="https://aadityapurani.com/2016/07/20/how-i-hacked-your-beats-account-apple-bug-bounty/">How i Hacked your Beats account ? Apple Bug Bounty</a>&nbsp;by @aaditya_purani</li><li><a href="https://hethical.io/paypal-bug-bounty-updating-the-paypal-me-profile-picture-without-consent-csrf-attack/">Paypal bug bounty: Updating the Paypal.me profile picture without consent (CSRF attack)</a>&nbsp;by Florian Courtial</li><li><a href="https://medium.com/bugbountywriteup/csrf-account-takeover-in-a-company-worth-1b-6e966813c262">CSRF Account Takeover</a> by Vulnerables</li><li><a href="https://ngailong.wordpress.com/2017/08/07/uber-login-csrf-open-redirect-account-takeover/">Uber CSRF Account Takeover</a> by Ron Chan</li><li><a href="https://whitton.io/articles/messenger-site-wide-csrf/">Messenger.com CSRF that show you the steps when you check for CSRF</a>&nbsp;by Jack Whitton</li></ul>
+
+
+
+<h3><strong>Cross-Site Scripting (XSS)</strong></h3>
+
+
+
+<p>XSS enables attackers to inject client-side scripts into web pages viewed by other users.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)</a><br>&gt;<a href="https://portswigger.net/web-security/cross-site-scripting">https://portswigger.net/web-security/cross-site-scripting</a><br>&gt;<a href="https://excess-xss.com/">https://excess-xss.com/</a><br><br><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="http://www.geekboy.ninja/blog/airbnb-bug-bounty-turning-self-xss-into-good-xss-2/">AirBnb Bug Bounty: Turning Self-XSS into Good-XSS #2</a>&nbsp;by geekboy</li><li><a href="https://httpsonly.blogspot.hk/2016/08/turning-self-xss-into-good-xss-v2.html">Uber Self XSS to Global XSS</a></li><li><a href="https://medium.com/@marin_m/how-i-found-a-5-000-google-maps-xss-by-fiddling-with-protobuf-963ee0d9caff#.cktt61q9g">How I found a $5,000 Google Maps XSS (by fiddling with Protobuf)</a>&nbsp;by Marin MoulinierFollow</li><li><a href="https://buer.haus/2017/03/08/airbnb-when-bypassing-json-encoding-xss-filter-waf-csp-and-auditor-turns-into-eight-vulnerabilities/">Airbnb – When Bypassing JSON Encoding, XSS Filter, WAF, CSP, and Auditor turns into Eight Vulnerabilities</a>&nbsp;by Brett</li><li><a href="http://blog.intothesymmetry.com/2017/05/cross-origin-brute-forcing-of-saml-and.html">XSSI, Client Side Brute Force</a></li><li><a href="https://hackerone.com/reports/231053">postMessage XSS Bypass</a></li><li><a href="http://zhchbin.github.io/2017/08/30/Uber-XSS-via-Cookie/">XSS in Uber via Cookie</a>&nbsp;by zhchbin</li><li><a href="https://hackerone.com/reports/207042">Stealing contact form data on www.hackerone.com using Marketo Forms XSS with postMessage frame-jumping and jQuery-JSONP</a>&nbsp;by frans</li><li><a href="http://zhchbin.github.io/2016/09/10/A-Valuable-XSS/">XSS due to improper regex in third party js Uber 7k XSS</a></li><li><a href="https://hackerone.com/reports/262230">XSS in TinyMCE 2.4.0</a>&nbsp;by Jelmer de Hen</li><li><a href="https://hackerone.com/reports/150179">Pass uncoded URL in IE11 to cause XSS</a></li><li><a href="http://blog.blackfan.ru/2017/09/devtwittercom-xss.html">Twitter XSS by stopping redirection and javascript scheme</a>&nbsp;by Sergey Bobrov</li></ul>
+
+
+
+<ul><li><a href="http://blog.wesecureapp.com/xss-by-tossing-cookies/">Microsoft XSS and Twitter XSS</a></li><li><a href="http://nootropic.me/blog/en/blog/2016/09/20/%E3%82%84%E3%81%AF%E3%82%8A%E3%83%8D%E3%83%83%E3%83%88%E3%82%B5%E3%83%BC%E3%83%95%E3%82%A3%E3%83%B3%E3%82%92%E3%81%97%E3%81%A6%E3%81%84%E3%81%9F%E3%82%89%E3%81%9F%E3%81%BE%E3%81%9F%E3%81%BEgoogle/">Google Japan Book XSS</a></li><li><a href="https://labs.detectify.com/2013/02/14/how-i-got-the-bug-bounty-for-mega-co-nz-xss/">Flash XSS mega nz</a>&nbsp;– by frans</li><li><a href="https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/">Flash XSS in multiple libraries</a>&nbsp;– by Olivier Beg</li><li><a href="http://blog.bentkowski.info/2015/04/xss-via-host-header-cse.html">xss in google IE, Host Header Reflection</a></li><li><a href="http://conference.hitb.org/hitbsecconf2012ams/materials/D1T2%20-%20Itzhak%20Zuk%20Avraham%20and%20Nir%20Goldshlager%20-%20Killing%20a%20Bug%20Bounty%20Program%20-%20Twice.pdf">Years ago Google xss</a></li><li><a href="http://blog.bentkowski.info/2015/04/xss-via-host-header-cse.html">xss in google by IE weird behavior</a></li><li><a href="http://dawgyg.com/2016/12/07/stored-xss-affecting-all-fantasy-sports-fantasysports-yahoo-com-2/">xss in Yahoo Fantasy Sport</a></li><li><a href="https://klikki.fi/adv/yahoo2.html">xss in Yahoo Mail Again, worth $10000</a>&nbsp;by Klikki Oy</li><li><a href="https://blog.it-securityguard.com/bugbounty-sleeping-stored-google-xss-awakens-a-5000-bounty/">Sleeping XSS in Google</a>&nbsp;by securityguard</li><li><a href="https://blog.it-securityguard.com/bugbounty-decoding-a-%F0%9F%98%B1-00000-htpasswd-bounty/">Decoding a .htpasswd to earn a payload of money</a>&nbsp;by securityguard</li><li><a href="http://www.orenh.com/2013/11/google-account-recovery-vulnerability.html#comment-form">Google Account Takeover</a></li></ul>
+
+
+
+<ul><li><a href="https://blog.it-securityguard.com/bugbounty-sleeping-stored-google-xss-awakens-a-5000-bounty/">Sleeping stored Google XSS Awakens a $5000 Bounty</a>&nbsp;by Patrik Fehrenbach</li><li><a href="http://blog.innerht.ml/rpo-gadgets/">RPO that lead to information leakage in Google</a>&nbsp;by filedescriptor</li><li><a href="https://whitton.io/articles/uber-turning-self-xss-into-good-xss/">God-like XSS, Log-in, Log-out, Log-in</a>&nbsp;in Uber by Jack Whitton</li><li><a href="http://www.breaksec.com/?p=6129">Three Stored XSS in Facebook</a>&nbsp;by Nirgoldshlager</li><li><a href="https://blog.bugcrowd.com/guest-blog-using-a-braun-shaver-to-bypass-xss-audit-and-waf-by-frans-rosen-detectify">Using a Braun Shaver to Bypass XSS Audit and WAF</a>&nbsp;by Frans Rosen</li><li><a href="https://whitton.io/articles/xss-on-facebook-via-png-content-types/">An XSS on Facebook via PNGs &amp; Wonky Content Types</a>&nbsp;by Jack Whitton<ul><li>he is able to make stored XSS from a irrelevant domain to main facebook domain</li></ul></li><li><a href="https://whitton.io/archive/persistent-xss-on-myworld-ebay-com/">Stored XSS in *.ebay.com</a>&nbsp;by Jack Whitton</li><li><a href="https://sites.google.com/site/bughunteruniversity/best-reports/account-recovery-xss">Complicated, Best Report of Google XSS</a>&nbsp;by Ramzes</li><li><a href="https://hackerone.com/reports/150179">Tricky Html Injection and Possible XSS in sms-be-vip.twitter.com</a>&nbsp;by secgeek</li><li><a href="http://www.pranav-venkat.com/2016/03/command-injection-which-got-me-6000.html">Command Injection in Google Console</a>&nbsp;by Venkat S</li><li><a href="http://www.paulosyibelo.com/2015/12/facebooks-moves-oauth-xss.html">Facebook’s Moves – OAuth XSS</a>&nbsp;by PAULOS YIBELO</li><li><a href="http://hmgmakarovich.blogspot.hk/2015/11/stored-xss-in-google-docs-bug-bounty.html">Stored XSS in Google Docs (Bug Bounty)</a>&nbsp;by Harry M Gertos</li><li><a href="https://hackerone.com/reports/152067">Stored XSS on developer.uber.com via admin account compromise in Uber</a>&nbsp;by James Kettle (albinowax)</li><li><a href="https://klikki.fi/adv/yahoo.html">Yahoo Mail stored XSS</a>&nbsp;by Klikki Oy</li><li><a href="http://mksben.l0.cm/2016/07/xxn-caret.html">Abusing XSS Filter: One ^ leads to XSS(CVE-2016-3212)</a>&nbsp;by Masato Kinugawa</li><li><a href="https://labs.detectify.com/2015/06/06/google-xss-turkey/">Youtube XSS</a>&nbsp;by fransrosen</li><li><a href="https://sites.google.com/site/bughunteruniversity/best-reports/openredirectsthatmatter">Best Google XSS again</a>&nbsp;– by Krzysztof Kotowicz</li><li><a href="https://labs.detectify.com/2016/10/24/combining-host-header-injection-and-lax-host-parsing-serving-malicious-data/">IE &amp; Edge URL parsin Problem</a>&nbsp;– by detectify</li><li><a href="http://sasi2103.blogspot.sg/2016/09/combination-of-techniques-lead-to-dom.html">Google XSS subdomain Clickjacking</a></li></ul>
+
+
+
+<h3>SQL Injection</h3>
+
+
+
+<p>SQL injection, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://www.owasp.org/index.php/SQL_Injection">https://www.owasp.org/index.php/SQL_Injection</a><br>&gt;<a href="https://portswigger.net/web-security/sql-injection">https://portswigger.net/web-security/sql-injection</a><br>&gt;<a href="https://www.imperva.com/learn/application-security/sql-injection-sqli/">https://www.imperva.com/learn/application-security/sql-injection-sqli/</a><br>&gt;<a href="https://www.w3schools.com/sql/sql_injection.asp">https://www.w3schools.com/sql/sql_injection.asp</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://blog.securitybreached.org/2018/09/08/sqli-bootcampnutanix-com-bug-bounty-poc/">SQL Injection Vulnerability nutanix</a> by Muhammad Khizer Javed</li><li><a href="http://buer.haus/2015/01/15/yahoo-root-access-sql-injection-tw-yahoo-com/">Yahoo – Root Access SQL Injection – tw.yahoo.com</a>&nbsp;by Brett Buerhaus</li><li><a href="https://hackerone.com/reports/135288">Multiple vulnerabilities in a WordPress plugin at drive.uber.com</a>&nbsp;by Abood Nour (syndr0me)</li><li><a href="http://blog.orange.tw/2017/01/bug-bounty-github-enterprise-sql-injection.html">GitHub Enterprise SQL Injection</a>&nbsp;by Orange</li><li><a href="https://hackerone.com/reports/125932">SQL injection in WordPress Plugin Huge IT Video Gallery in Uber</a>&nbsp;by glc</li><li><a href="https://hackerone.com/reports/150156">SQL Injection on sctrack.email.uber.com.cn</a>&nbsp;by Orange Tsai</li></ul>
+
+
+
+<h3>Remote Code Execution (RCE)</h3>
+
+
+
+<p>In RCE an attacker&#8217;s able to execute arbitrary commands or code on a target machine or in a target Machine.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://www.netsparker.com/blog/web-security/remote-code-evaluation-execution/">https://www.netsparker.com/blog/web-security/remote-code-evaluation-execution/</a><br>&gt;<a href="https://en.wikipedia.org/wiki/Arbitrary_code_execution">https://en.wikipedia.org/wiki/Arbitrary_code_execution</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://www.evonide.com/how-we-broke-php-hacked-pornhub-and-earned-20000-dollar/">How we broke PHP, hacked Pornhub and earned $20,000</a>&nbsp;by Ruslan Habalov<ul><li><em>Alert</em>, God-like Write-up, make sure you know what is ROP before clicking, which I don’t =(</li></ul></li><li><a href="https://www.secgeek.net/bookfresh-vulnerability/">RCE deal to tricky file upload</a>&nbsp;by secgeek</li><li><a href="https://hackerone.com/reports/134738">WordPress SOME bug in plupload.flash.swf leading to RCE in Automatic</a>&nbsp;by Cure53 (cure53)</li><li><a href="https://hackerone.com/reports/128750">Read-Only user can execute arbitraty shell commands on AirOS</a>&nbsp;by 93c08539 (93c08539)</li><li><a href="https://hackerone.com/reports/158148">Remote Code Execution by impage upload!</a>&nbsp;by Raz0r (ru_raz0r)</li><li><a href="https://bitquark.co.uk/blog/2014/08/31/popping_a_shell_on_the_oculus_developer_portal">Popping a shell on the Oculus developer portal</a>&nbsp;by Bitquark</li><li><a href="https://5haked.blogspot.sg/">Crazy! PornHub RCE AGAIN!!! How I hacked Pornhub for fun and profit – 10,000$</a>&nbsp;by 5haked</li><li><a href="http://artsploit.blogspot.hk/2016/08/pprce2.html">PayPal Node.js code injection (RCE)</a>&nbsp;by Michael Stepankin</li><li><a href="http://secalert.net/#ebay-rce-ccs">eBay PHP Parameter Injection lead to RCE</a></li><li><a href="https://seanmelia.files.wordpress.com/2016/02/yahoo-remote-code-execution-cms1.pdf">Yahoo Acqusition RCE</a></li><li><a href="http://elladodelnovato.blogspot.hk/2017/02/command-injection-vulnerability-in.html?spref=tw&amp;m=1">Command Injection Vulnerability in Hostinger</a>&nbsp;by @alberto__segura</li><li><a href="http://buer.haus/2017/03/13/airbnb-ruby-on-rails-string-interpolation-led-to-remote-code-execution/">RCE in Airbnb by Ruby Injection</a>&nbsp;by buerRCE</li><li><a href="https://hackerone.com/reports/212696">RCE in Imgur by Command Line</a></li><li><a href="https://hackerone.com/reports/206227">RCE in git.imgur.com by abusing out dated software</a>&nbsp;by Orange Tsai</li><li><a href="https://hackerone.com/reports/213558">RCE in Disclosure</a></li><li><a href="https://medium.com/@th3g3nt3l/how-i-got-5500-from-yahoo-for-rce-92fffb7145e6">Remote Code Execution by struct2 Yahoo Server</a></li><li><a href="http://samcurry.net/how-i-couldve-taken-over-the-production-server-of-a-yahoo-acquisition-through-command-injection/">Command Injection in Yahoo Acquisition</a></li><li><a href="http://blog.pentestbegins.com/2017/07/21/hacking-into-paypal-server-remote-code-execution-2017/">Paypal RCE</a></li><li><a href="http://blog.saynotolinux.com/blog/2016/08/15/jetbrains-ide-remote-code-execution-and-local-file-disclosure-vulnerability-analysis/">$50k RCE in JetBrains IDE</a></li><li><a href="http://nahamsec.com/secure-your-jenkins-instance-or-hackers-will-force-you-to/">$20k RCE in Jenkin Instance</a>&nbsp;by @nahamsec</li></ul>
+
+
+
+<ul><li><a href="https://www.vulnerability-lab.com/get_content.php?id=1474">JDWP Remote Code Execution in PayPal</a>&nbsp;by Milan A Solanki</li><li><a href="http://www.ubercomp.com/posts/2014-01-16_facebook_remote_code_execution">XXE in OpenID: one bug to rule them all, or how I found a Remote Code Execution flaw affecting Facebook’s servers</a>&nbsp;by Reginaldo Silva</li><li><a href="http://devco.re/blog/2016/04/21/how-I-hacked-facebook-and-found-someones-backdoor-script-eng-ver/">How I Hacked Facebook, and Found Someone’s Backdoor Script</a>&nbsp;by Orange Tsai</li><li><a href="http://blog.orange.tw/2017/07/how-i-chained-4-vulnerabilities-on.html">How I Chained 4 vulnerabilities on GitHub Enterprise, From SSRF Execution Chain to RCE!</a>&nbsp;by Orange Tsai</li><li><a href="https://hackerone.com/reports/125980">uber.com may RCE by Flask Jinja2 Template Injection</a>&nbsp;by Orange Tsai</li><li><a href="http://blog.orange.tw/2013/11/yahoo-bug-bounty-part-2-loginyahoocom.html">Yahoo Bug Bounty – *.login.yahoo.com Remote Code Execution</a>&nbsp;by Orange Tsai (in Chinese)</li><li><a href="https://sites.google.com/site/testsitehacking/-36k-google-app-engine-rce">Google App Engine RCE</a> by Ezequiel Pereira</li></ul>
+
+
+
+<ul><li><a href="http://nahamsec.com/exploiting-imagemagick-on-yahoo/">Exploiting ImageMagick to get RCE on Polyvore (Yahoo Acquisition)</a>&nbsp;by NaHamSec</li><li><a href="https://hackerone.com/reports/135072">Exploting ImageMagick to get RCE on HackerOne</a>&nbsp;by c666a323be94d57</li><li><a href="https://hethical.io/trello-bug-bounty-access-servers-files-using-imagetragick/">Trello bug bounty: Access server’s files using ImageTragick</a>&nbsp;by Florian Courtial</li><li><a href="https://github.com/ngalongc/bug-bounty-reference/blob/master/4lemon.ru/2017-01-17_facebook_imagetragick_remote_code_execution.html">40k fb rce</a></li><li><a href="https://scarybeastsecurity.blogspot.hk/2017/05/bleed-continues-18-byte-file-14k-bounty.html">Yahoo Bleed 1</a></li><li><a href="https://scarybeastsecurity.blogspot.hk/2017/05/bleed-more-powerful-dumping-yahoo.html">Yahoo Bleed 2</a></li></ul>
+
+
+
+<h3>Insecure Direct Object Reference (IDOR)</h3>
+
+
+
+<p>In IDOR an application provides&nbsp;<strong>direct</strong>&nbsp;access to&nbsp;<strong>objects</strong>&nbsp;based on the user-supplied input. As a result of this vulnerability, attackers can bypass authorization and access resources in the system directly.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://www.bugcrowd.com/blog/how-to-find-idor-insecure-direct-object-reference-vulnerabilities-for-large-bounty-rewards/">https://www.bugcrowd.com/blog/how-to-find-idor-insecure-direct-object-reference-vulnerabilities-for-large-bounty-rewards/</a><br>&gt;<a href="https://www.owasp.org/index.php/Testing_for_Insecure_Direct_Object_References_(OTG-AUTHZ-004)">https://www.owasp.org/index.php/Testing_for_Insecure_Direct_Object_References_(OTG-AUTHZ-004)</a><br>&gt;<a href="https://www.secjuice.com/idor-insecure-direct-object-reference-definition/">https://www.secjuice.com/idor-insecure-direct-object-reference-definition/</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://medium.com/@rajsek/my-3rd-facebook-bounty-hat-trick-chennai-tcs-er-name-listed-in-facebook-hall-of-fame-47f57f2a4f71#.9gbtbv42q">DOB disclosed using “Facebook Graph API Reverse Engineering”</a>&nbsp;by Raja Sekar Durairaj</li><li><a href="http://philippeharewood.com/change-the-description-of-a-video-without-publish_actions-permission/">Change the description of a video without publish_actions permission in Facebook</a>&nbsp;by phwd</li><li><a href="https://www.bugbountyhq.com/front/latestnews/dWRWR0thQ2ZWOFN5cTE1cXQrSFZmUT09/">Response To Request Injection (RTRI)</a>&nbsp;by ?, be honest, thanks to this article, I have found quite a few bugs because of using his method, respect to the author!</li><li><a href="https://hackerone.com/reports/152696">Leak of all project names and all user names , even across applications on Harvest</a>&nbsp;by Edgar Boda-Majer (eboda)</li><li><a href="https://hackerone.com/reports/162809">Changing paymentProfileUuid when booking a trip allows free rides at Uber</a>&nbsp;by Matthew Temmy (temmyscript)</li><li><a href="https://hackerone.com/reports/174721">View private tweet</a></li><li><a href="http://www.rohk.xyz/uber-uuid/">Uber Enum UUID</a></li><li><a href="http://stephensclafani.com/2014/07/08/hacking-facebooks-legacy-api-part-1-making-calls-on-behalf-of-any-user/">Hacking Facebook’s Legacy API, Part 1: Making Calls on Behalf of Any User</a>&nbsp;by Stephen Sclafani</li><li><a href="http://stephensclafani.com/2014/07/29/hacking-facebooks-legacy-api-part-2-stealing-user-sessions/">Hacking Facebook’s Legacy API, Part 2: Stealing User Sessions</a>&nbsp;by Stephen Sclafani</li><li><a href="https://danmelamed.blogspot.hk/2017/01/facebook-vulnerability-delete-any-video.html">Delete FB Video</a></li><li><a href="https://pranavhivarekar.in/2016/06/23/facebooks-bug-delete-any-video-from-facebook/">Delete FB Video</a></li><li><a href="http://arunsureshkumar.me/index.php/2016/09/16/facebook-page-takeover-zero-day-vulnerability/">Facebook Page Takeover by Manipulating the Parameter</a>&nbsp;by arunsureshkumar</li><li><a href="http://buer.haus/2017/03/31/airbnb-web-to-app-phone-notification-idor-to-view-everyones-airbnb-messages/">Viewing private Airbnb Messages</a></li><li><a href="http://kedrisec.com/twitter-publish-by-any-user/">IDOR tweet as any user</a>&nbsp;by kedrisec</li><li><a href="http://www.anandpraka.sh/2017/05/how-i-took-control-of-your-twitter.html">Classic IDOR endpoints in Twitter</a></li><li><a href="https://seanmelia.wordpress.com/2017/06/01/privilege-escalation-in-a-django-application/">Mass Assignment, Response to Request Injection, Admin Escalation</a>&nbsp;by sean</li></ul>
+
+
+
+<ul><li><a href="https://hethical.io/trello-bug-bounty-the-websocket-receives-data-when-a-public-company-creates-a-team-visible-board/">Trello bug bounty: The websocket receives data when a public company creates a team visible board</a>&nbsp;by Florian Courtial</li><li><a href="https://hethical.io/trello-bug-bounty-payments-informations-are-sent-to-the-webhook-when-a-team-changes-its-visibility/">Trello bug bounty: Payments informations are sent to the webhook when a team changes its visibility</a>&nbsp;by Florian Courtial</li><li><a href="https://hackerone.com/reports/143717">Change any user’s password in Uber</a>&nbsp;by mongo</li><li><a href="https://www.secgeek.net/youtube-vulnerability/">Vulnerability in Youtube allowed moving comments from any video to another</a>&nbsp;by secgeek<ul><li>It’s&nbsp;<em>Google</em>&nbsp;Vulnerability, so it’s worth reading, as generally it is more difficult to find Google vulnerability</li></ul></li><li><a href="https://www.secgeek.net/twitter-vulnerability/">Twitter Vulnerability Could Credit Cards from Any Twitter Account</a>&nbsp;by secgeek</li><li><a href="https://www.secgeek.net/yahoo-comments-vulnerability/">One Vulnerability allowed deleting comments of any user in all Yahoo sites</a>&nbsp;by secgeek</li><li><a href="http://yasserali.com/microsoft-careers-com-remote-password-reset/">Microsoft-careers.com Remote Password Reset</a>&nbsp;by Yaaser Ali</li><li><a href="http://yasserali.com/how-i-could-change-your-ebay-password/">How I could change your eBay password</a>&nbsp;by Yaaser Ali</li><li><a href="https://duo.com/blog/duo-security-researchers-uncover-bypass-of-paypal-s-two-factor-authentication">Duo Security Researchers Uncover Bypass of PayPal’s Two-Factor Authentication</a>&nbsp;by Duo Labs</li><li><a href="http://www.anandpraka.sh/2014/11/hacking-facebookcomthanks-posting-on.html">Hacking Facebook.com/thanks Posting on behalf of your friends!&nbsp;</a>by Anand Prakash</li><li><a href="https://bitquark.co.uk/blog/2016/02/09/how_i_got_access_to_millions_of_redacted_accounts">How I got access to millions of [redacted] accounts</a></li><li><a href="https://hackerone.com/reports/137502">All Vimeo Private videos disclosure via Authorization Bypass with Excellent Technical Description</a>&nbsp;by Enguerran Gillier (opnsec)</li><li><a href="https://hackerone.com/reports/149907">Urgent: attacker can access every data source on Bime</a>&nbsp;by Jobert Abma (jobert)</li><li><a href="https://hackerone.com/reports/145467">Downloading password protected / restricted videos on Vimeo</a>&nbsp;by Gazza (gazza)</li><li><a href="https://hackerone.com/reports/151465">Get organization info base on uuid in Uber</a>&nbsp;by Severus (severus)</li><li><a href="http://roy-castillo.blogspot.hk/2013/07/how-i-exposed-your-primary-facebook.html">How I Exposed your Primary Facebook Email Address (Bug worth $4500)</a>&nbsp;by Roy Castillo</li></ul>
+
+
+
+<h3>Unrestricted File Upload</h3>
+
+
+
+<p>As in name unrestricted file upload allows user to upload malicious file to a system to further exploit to for Code execution </p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/unrestricted-file-upload/">https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/unrestricted-file-upload/</a><br>&gt;<a href="https://www.owasp.org/index.php/Unrestricted_File_Upload">https://www.owasp.org/index.php/Unrestricted_File_Upload</a><br>&gt;<a href="https://www.hackingarticles.in/5-ways-file-upload-vulnerability-exploitation/">https://www.hackingarticles.in/5-ways-file-upload-vulnerability-exploitation/</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://hackerone.com/reports/97672">File Upload XSS in image uploading of App in mopub</a>&nbsp;by vijay kumar</li><li><a href="https://www.secgeek.net/bookfresh-vulnerability/">RCE deal to tricky file upload</a>&nbsp;by secgeek</li><li><a href="https://hackerone.com/reports/97672">File Upload XSS in image uploading of App in mopub in Twitter</a>&nbsp;by vijay kumar (vijay_kumar1110)</li><li><a href="https://blog.securitybreached.org/2017/12/19/unrestricted-file-upload-to-rce-bug-bounty-poc/">Unrestricted File Upload to RCE</a> by Muhammad Khizer Javed</li></ul>
+
+
+
+<h3>XML External Entity Attack (XXE)</h3>
+
+
+
+<p>XXE is an attack against an application that parses XML input. This attack occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://portswigger.net/web-security/xxe">https://portswigger.net/web-security/xxe</a><br>&gt;<a href="https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet">https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet</a><br>&gt;<a href="https://phonexicum.github.io/infosec/xxe.html">https://phonexicum.github.io/infosec/xxe.html</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://seanmelia.files.wordpress.com/2016/01/out-of-band-xml-external-entity-injection-via-saml-redacted.pdf">XXE through SAML</a></li><li><a href="https://httpsonly.blogspot.hk/2017/01/0day-writeup-xxe-in-ubercom.html">XXE in Uber to read local files</a></li><li><a href="http://esoln.net/Research/2017/03/30/xxe-in-lithium-community-platform/">XXE by SVG in community.lithium.com</a></li><li><a href="https://blog.detectify.com/2014/04/11/how-we-got-read-access-on-googles-production-servers/">How we got read access on Google’s production servers</a>&nbsp;by detectify</li><li><a href="http://nerdint.blogspot.hk/2016/08/blind-oob-xxe-at-uber-26-domains-hacked.html">Blind OOB XXE At UBER 26+ Domains Hacked</a>&nbsp;by Raghav Bisht</li></ul>
+
+
+
+<h2>Local File Inclusion (LFI)</h2>
+
+
+
+<p>The File Inclusion vulnerability allows an attacker to include a file, usually exploiting a &#8220;dynamic file inclusion&#8221; mechanisms implemented in the target application. The vulnerability occurs due to the use of user-supplied input without proper validation.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion">https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion</a><br>&gt;<a href="https://www.netsparker.com/blog/web-security/local-file-inclusion-vulnerability/">https://www.netsparker.com/blog/web-security/local-file-inclusion-vulnerability/</a><br>&gt;<a href="https://medium.com/@Aptive/local-file-inclusion-lfi-web-application-penetration-testing-cc9dc8dd3601">https://medium.com/@Aptive/local-file-inclusion-lfi-web-application-penetration-testing-cc9dc8dd3601</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="https://seanmelia.wordpress.com/2015/12/23/various-server-side-request-forgery-issues/">SSRF to LFI</a></li><li><a href="https://hackerone.com/reports/213558">Disclosure Local File Inclusion by Symlink</a></li><li><a href="http://josipfranjkovic.blogspot.hk/2014/12/reading-local-files-from-facebooks.html">Facebook Symlink Local File Inclusion</a></li><li><a href="https://hackerone.com/reports/158330">Gitlab Symlink Local File Inclusion</a></li><li><a href="https://hackerone.com/reports/178152">Gitlab Symlink Local File Inclusion Part II</a></li><li><a href="http://panchocosil.blogspot.sg/2017/05/one-cloud-based-local-file-inclusion.html">Multiple Company LFI</a></li><li><a href="https://hackerone.com/reports/226756">LFI by video conversion, excited about this trick!</a></li></ul>
+
+
+
+<h3>Subdomain Takeover</h3>
+
+
+
+<p>A process of registering a non-existing domain name to gain control over another domain.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://blog.securitybreached.org/2017/10/11/what-is-subdomain-takeover-vulnerability/">https://blog.securitybreached.org/2017/10/11/what-is-subdomain-takeover-vulnerability/</a><br>&gt;<a href="https://0xpatrik.com/subdomain-takeover-basics/">https://0xpatrik.com/subdomain-takeover-basics/</a><br>&gt;<a href="https://github.com/EdOverflow/can-i-take-over-xyz">https://github.com/EdOverflow/can-i-take-over-xyz</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="http://www.geekboy.ninja/blog/hijacking-tons-of-instapage-expired-users-domains-subdomains/">Hijacking tons of Instapage expired users Domains &amp; Subdomains</a>&nbsp;by geekboy</li><li><a href="https://hackerone.com/reports/156536">Reading Emails in Uber Subdomains</a></li><li><a href="http://secalert.net/slack-security-bug-bounty.html">Slack Bug Journey</a>&nbsp;– by David Vieira-Kurz</li><li><a href="https://www.arneswinnen.net/2017/06/authentication-bypass-on-ubers-sso-via-subdomain-takeover/">Subdomain takeover and chain it to perform authentication bypass</a>&nbsp;by Arne Swinnen</li><li><a href="https://blog.securitybreached.org/2017/11/20/uber-wildcard-subdomain-takeover/">UBER Wildcard Subdomain Takeover </a> by Muhammad Khizer Javed</li><li><a href="https://blog.securitybreached.org/2017/10/10/subdomain-takeover-lamborghini-hacked/">Lamborghini Subdomain Takeover Through Expired Cloudfront Distribution</a> by Muhammad Khizer Javed</li><li><a href="https://blog.securitybreached.org/2018/09/24/subdomain-takeover-via-unsecured-s3-bucket/">Subdomain Takeover via Unsecured S3 Bucket Connected to the Website</a> by Muhammad khizer Javed</li></ul>
+
+
+
+<h3>Server Side Request Forgery (SSRF)</h3>
+
+
+
+<p>by SSRF the attacker can abuse functionality on the server to read or update internal resources.</p>
+
+
+
+<p><strong>References to read:</strong><br><br>&gt;<a href="https://medium.com/@madrobot/ssrf-server-side-request-forgery-types-and-ways-to-exploit-it-part-1-29d034c27978">https://medium.com/@madrobot/ssrf-server-side-request-forgery-types-and-ways-to-exploit-it-part-1-29d034c27978</a><br>&gt;<a href="https://www.owasp.org/index.php/Server_Side_Request_Forgery">https://www.owasp.org/index.php/Server_Side_Request_Forgery</a><br>&gt;<a href="https://www.netsparker.com/blog/web-security/server-side-request-forgery-vulnerability-ssrf/">https://www.netsparker.com/blog/web-security/server-side-request-forgery-vulnerability-ssrf/</a><br>&gt;<a href="https://blog.detectify.com/2019/01/10/what-is-server-side-request-forgery-ssrf/">https://blog.detectify.com/2019/01/10/what-is-server-side-request-forgery-ssrf/</a></p>
+
+
+
+<p><strong>Some POCs:</strong></p>
+
+
+
+<ul><li><a href="http://buer.haus/2016/04/18/esea-server-side-request-forgery-and-querying-aws-meta-data/">ESEA Server-Side Request Forgery and Querying AWS Meta Data</a>&nbsp;by Brett Buerhaus</li><li><a href="https://seanmelia.files.wordpress.com/2016/07/ssrf-to-pivot-internal-networks.pdf">SSRF to pivot internal network</a></li><li><a href="https://seanmelia.wordpress.com/2015/12/23/various-server-side-request-forgery-issues/">SSRF to LFI</a></li><li><a href="https://www.rcesecurity.com/2017/03/ok-google-give-me-all-your-internal-dns-information/">SSRF to query google internal server</a></li><li><a href="https://buer.haus/2017/03/09/airbnb-chaining-third-party-open-redirect-into-server-side-request-forgery-ssrf-via-liveperson-chat/">SSRF by using third party Open redirect</a>&nbsp;by Brett BUERHAUS</li><li><a href="https://twitter.com/BugBountyHQ/status/868242771617792000">SSRF tips from BugBountyHQ of Images</a></li><li><a href="http://www.kernelpicnic.net/2017/05/29/Pivoting-from-blind-SSRF-to-RCE-with-Hashicorp-Consul.html">SSRF to RCE</a></li><li><a href="https://hackerone.com/reports/248668">XXE at Twitter</a></li><li><a href="http://blog.portswigger.net/2017/07/cracking-lens-targeting-https-hidden.html">Blog post: Cracking the Lens: Targeting HTTP’s Hidden Attack-Surface</a></li></ul>
+
+
+
+<p>Some Other Interesting POCS: <br><br>A huge collection at <a href="https://github.com/djadmin/awesome-bug-bounty">https://github.com/djadmin/awesome-bug-bounty</a></p>
+
+
+
+<h4>Deserialization</h4>
+
+
+
+<ul><li><a href="http://artsploit.blogspot.hk/2016/01/paypal-rce.html">Java Deserialization in manager.paypal.com</a>&nbsp;by Michael Stepankin</li><li><a href="http://www.exfiltrated.com/research-Instagram-RCE.php">Instagram’s Million Dollar Bug</a>&nbsp;by Wesley Wineberg</li><li><a href="https://hackerone.com/reports/134321">(Ruby Cookie Deserialization RCE on facebooksearch.algolia.com</a>&nbsp;by Michiel Prins (michiel)</li><li><a href="https://seanmelia.wordpress.com/2016/07/22/exploiting-java-deserialization-via-jboss/">Java deserialization</a>&nbsp;by meals</li></ul>
+
+
+
+<h3>Race Condition</h3>
+
+
+
+<ul><li><a href="http://josipfranjkovic.blogspot.hk/2015/04/race-conditions-on-facebook.html">Race conditions on Facebook, DigitalOcean and others (fixed)</a>&nbsp;by Josip Franjković</li><li><a href="https://hackerone.com/reports/146845">Race Conditions in Popular reports feature in HackerOne</a>&nbsp;by Fábio Pires (shmoo)</li></ul>
+
+
+
+<h3>Business Logic Flaw</h3>
+
+
+
+<ul><li><a href="http://ashishpadelkar.com/index.php/2015/09/23/facebook-simple-technical-bug-worth-7500/">Facebook simple technical hack to see the timeline</a>&nbsp;by Ashish Padelkar</li><li><a href="https://www.arneswinnen.net/2016/07/how-i-could-steal-money-from-instagram-google-and-microsoft/">How I Could Steal Money from Instagram, Google and Microsoft</a>&nbsp;by Arne Swinnen</li><li><a href="http://www.anandpraka.sh/2015/12/summary-this-blog-post-is-about.html">How I could have removed all your Facebook notes</a></li><li><a href="http://blog.darabi.me/2015/03/facebook-bypass-ads-account-roles.html">Facebook – bypass ads account’s roles vulnerability 2015</a>&nbsp;by POUYA DARABI</li><li><a href="http://www.anandpraka.sh/2017/03/how-anyone-could-have-used-uber-to-ride.html">Uber Ride for Free</a>&nbsp;by anand praka</li><li><a href="https://t.co/MCOM7j2dWX">Uber Eat for Free</a>&nbsp;by</li></ul>
+
+
+
+<h3>Authentication Bypass</h3>
+
+
+
+<ul><li><a href="https://hackerone.com/reports/138869">OneLogin authentication bypass on WordPress sites via XMLRPC in Uber</a>&nbsp;by Jouko Pynnönen (jouko)</li><li><a href="https://henryhoggard.co.uk/blog/Paypal-2FA-Bypass">2FA PayPal Bypass</a>&nbsp;by henryhoggard</li><li><a href="http://www.economyofmechanism.com/github-saml.html">SAML Bug in Github worth 15000</a></li><li><a href="https://www.arneswinnen.net/2017/06/authentication-bypass-on-airbnb-via-oauth-tokens-theft/">Authentication bypass on Airbnb via OAuth tokens theft</a></li><li><a href="http://ngailong.com/uber-login-csrf-open-redirect-account-takeover/">Uber Login CSRF + Open Redirect -&gt; Account Takeover at Uber</a></li><li>[<a href="http://c0rni3sm.blogspot.hk/2017/08/accidentally-typo-to-bypass.html?m=1](Administrative">http://c0rni3sm.blogspot.hk/2017/08/accidentally-typo-to-bypass.html?m=1](Administrative</a>&nbsp;Panel Access) by c0rni3sm</li><li><a href="http://blog.mish.re/index.php/2017/09/06/uber-bug-bounty-gaining-access-to-an-internal-chat-system/">Uber Bug Bounty: Gaining Access To An Internal Chat System</a>&nbsp;by mishre</li></ul>
+
+
+
+<h3>HTTP Header Injection</h3>
+
+
+
+<ul><li><a href="https://blog.innerht.ml/overflow-trilogy/">Twitter Overflow Trilogy in Twitter</a>&nbsp;by filedescriptor</li><li><a href="https://blog.innerht.ml/twitter-crlf-injection/">Twitter CRLF</a>&nbsp;by filedescriptor</li><li><a href="https://adblockplus.org/blog/finding-security-issues-in-a-website-or-how-to-get-paid-by-google">Adblock Plus and (a little) more in Google</a></li><li><a href="https://sites.google.com/site/testsitehacking/10k-host-header">$10k host header</a>&nbsp;by Ezequiel Pereira</li></ul>
+
+
+
+<h2>Email Related</h2>
+
+
+
+<ul><li><a href="http://blog.pentestnepal.tech/post/156959105292/this-domain-is-my-domain-g-suite-a-record">This domain is my domain – G Suite A record vulnerability</a></li><li><a href="http://blog.pentestnepal.tech/post/156707088037/i-got-emails-g-suite-vulnerability">I got emails – G Suite Vulnerability</a></li><li><a href="http://blog.pentestnepal.tech/post/150381068912/how-i-snooped-into-your-private-slack-messages">How I snooped into your private Slack messages [Slack Bug bounty worth $2,500]</a></li><li><a href="http://blog.pentestnepal.tech/post/149985438982/reading-ubers-internal-emails-uber-bug-bounty">Reading Uber’s Internal Emails [Uber Bug Bounty report worth $10,000]</a></li><li><a href="https://medium.com/@intideceukelaire/how-i-hacked-hundreds-of-companies-through-their-helpdesk-b7680ddc2d4c">Slack Yammer Takeover by using TicketTrick</a>&nbsp;by Inti De Ceukelaire</li><li><a href="https://ret2got.wordpress.com/2017/10/05/how-i-could-have-mass-uploaded-from-every-flickr-account/">How I could have mass uploaded from every Flickr account!</a></li></ul>
+
+
+
+<h2>Money Stealing</h2>
+
+
+
+<ul><li><a href="https://hackerone.com/reports/176461">Round error issue -&gt; produce money for free in Bitcoin Site</a>&nbsp;by 4lemon</li></ul>
+
+
+
+<h2>Others</h2>
+
+
+
+<ul><li><a href="http://ngailong.com/abusing-multistage-logic-flaw-to-buy-anything-for-free-at-hk-deals-yahoo-com/">Payment Flaw in Yahoo</a></li><li><a href="http://ngailong.com/bypassing-google-email-domain-check-to-deliver-spam-email-on-googles-behalf/">Bypassing Google Email Domain Check to Deliver Spam Email on Google’s Behalf</a></li><li><a href="http://ngailong.com/what-could-happen-when-server-side-request-forgery-combine-with-cross-site-scripting/">When Server Side Request Forgery combine with Cross Site Scripting</a></li></ul>
+
+
+
+<ul><li><a href="http://research.aurainfosec.io/bypassing-saml20-SSO/">SAML Pen Test Good Paper</a></li><li><a href="https://www.facebook.com/notes/phwd/facebook-bug-bounties/707217202701640">A list of FB writeup collected by phwd</a>&nbsp;by phwd</li><li><a href="http://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html">NoSQL Injection</a>&nbsp;by websecurify</li><li><a href="http://www.geekboy.ninja/blog/exploiting-misconfigured-cors-cross-origin-resource-sharing/">CORS in action</a></li><li><a href="http://www.cynet.com/blog-facebook-originull/">CORS in Fb messenger</a></li><li><a href="https://blog.zsec.uk/ltr101-method-to-madness/">Web App Methodologies</a></li><li><a href="https://www.silentrobots.com/blog/2015/12/14/xe-cheatsheet-update/">XXE Cheatsheet</a></li><li><a href="http://www.economyofmechanism.com/office365-authbypass.html#office365-authbypass">The road to hell is paved with SAML Assertions, Microsoft Vulnerability</a></li><li><a href="https://cirw.in/blog/hash-injection">Study this if you like to learn Mongo SQL Injection</a>&nbsp;by cirw</li><li><a href="http://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html">Mongo DB Injection again</a>&nbsp;by websecrify</li><li><a href="https://www.youtube.com/watch?v=GNU0_Uzyvl0">w3af speech about modern vulnerability</a>&nbsp;by w3af</li><li><a href="http://omergil.blogspot.co.il/2017/02/web-cache-deception-attack.html">Web cache attack that lead to account takeover</a></li><li><a href="https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/somorovsky">A talk to teach you how to use SAML Raider</a></li><li><a href="http://d3adend.org/xss/ghettoBypass">XSS Checklist when you have no idea how to exploit the bug</a></li><li><a href="https://ctftime.org/writeups?tags=web200&amp;hidden-tags=web%2cweb100%2cweb200">CTF write up, Great for Bug Bounty</a></li><li><a href="http://sirdarckcat.blogspot.com/2017/02/unpatched-0day-jquery-mobile-xss.html">It turns out every site uses jquery mobile with Open Redirect is vulnerable to XSS</a>&nbsp;by sirdarckcat</li><li><a href="https://hackerone.com/reports/199779">Bypass CSP by using google-analytics</a></li><li><a href="https://hackerone.com/reports/219215">Payment Issue with Paypal</a></li><li><a href="http://paper.seebug.org/">Browser Exploitation in Chinese</a></li><li><a href="https://t.co/0Kpzo52ycb">XSS bypass filter</a></li><li><a href="https://github.com/ChALkeR/notes/blob/master/Improper-markup-sanitization.md">Markup Impropose Sanitization</a></li><li><a href="https://www.blackhat.com/docs/us-17/thursday/us-17-Lekies-Dont-Trust-The-DOM-Bypassing-XSS-Mitigations-Via-Script-Gadgets.pdf">Breaking XSS mitigations via Script Gadget</a></li><li><a href="https://browser-security.x41-dsec.de/X41-Browser-Security-White-Paper.pdf">X41 Browser Security White Paper</a></li></ul>
+
+
+
+<p>So these were some common issues that one should get a grip on and learn more and more about Following is a list of some Attacks Topics that You Should do some research and read the Blogs/reports on them.. </p>
+
+
+
+<ul><li><strong><a href="http://securityidiots.com/Web-Pentest/SQL-Injection">Sql Injection Attack</a></strong></li><li><strong><a href="https://medium.com/@SecurityBender/exploiting-a-hql-injection-895f93d06718">Hibernate Query Language Injection</a></strong></li><li><strong><a href="http://www.hackingarticles.in/beginner-guide-os-command-injection/">Direct OS Code Injection</a></strong></li><li><strong><a href="https://depthsecurity.com/blog/exploitation-xml-external-entity-xxe-injection">XML Entity Injection</a></strong></li><li><strong><a href="https://hdivsecurity.com/owasp-broken-authentication-and-session-management">Broken Authentication and Session Management</a></strong></li><li><strong><a href="https://brutelogic.com.br/blog/">Cross-Site Scripting (XSS)</a></strong></li><li><strong><a href="https://www.bugcrowd.com/how-to-find-idor-insecure-direct-object-reference-vulnerabilities-for-large-bounty-rewards/">Insecure Direct Object References</a></strong></li><li><strong><a href="https://blog.detectify.com/2016/07/13/owasp-top-10-missing-function-level-access-control-7/">Missing Function Level Access Control</a></strong></li><li><strong><a href="https://www.incapsula.com/web-application-security/csrf-cross-site-request-forgery.html">Cross-Site Request Forgery (CSRF)</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Top_10-2017_A9-Using_Components_with_Known_Vulnerabilities">Using Components with Known Vulnerabilities</a></strong></li><li><strong><a href="https://www.tutorialspoint.com/security_testing/unvalidated_redirects_and_forwards.htm">Unvalidated Redirects and Forwards</a></strong></li><li><strong><a href="https://www.forcepoint.com/cyber-edu/clickjacking">ClickJacking Attacks</a></strong></li><li><strong><a href="https://www.networkworld.com/article/2277316/tech-primers/tech-primers-how-dns-cache-poisoning-works.html">DNS Cache Poisoning</a></strong></li><li><strong><a href="https://prezi.com/0pxge8u_4iov/symlinking-an-insider-attack/">Symlinking</a></strong></li><li><strong><a href="https://hackernoon.com/exploiting-electron-rce-in-exodus-wallet-d9e6db13c374">Remote Code Execution Attacks</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Testing_for_Remote_File_Inclusion">Remote File inclusion</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion">Local file inclusion</a></strong></li><li><strong><a href="https://www.cloudflare.com/learning/ddos/glossary/denial-of-service/">Denial oF Service Attack</a></strong></li><li><strong><a href="https://samy.pl/phpwn/">PHPwn</a></strong></li><li><strong><a href="https://github.com/allodoxaphobia/natpinning/wiki/What-is-NAT-pinning">NAT Pinning</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Cross_Site_History_Manipulation_(XSHM)">XSHM</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Testing_for_HTTP_Parameter_pollution_(OTG-INPVAL-004)">HTTP Parameter Pollution</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Reverse_Tabnabbing">Tabnabbing</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/LDAP_Injection_Prevention_Cheat_Sheet">LDAP injection</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Log_Injection">Log Injection</a></strong></li><li><strong><a href="https://portswigger.net/web-security/file-path-traversal">Path Traversal</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Reflected_DOM_Injection">Reflected DOM Injection</a></strong></li><li><strong><a href="http://www.ids-sax2.com/Knowledgebase/NetworkSecurity/Repudiation-Attack.htm">Repudiation Attack</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Resource_Injection">Resource Injection</a></strong></li><li><strong><a href="https://portswigger.net/kb/issues/00101100_ssi-injection">Server-Side Includes (SSI) Injection</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Session_fixation">Session fixation</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Session_hijacking_attack">Session hijacking attack</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Session_Prediction">Session Prediction</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Setting_Manipulation">Setting Manipulation</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Special_Element_Injection">Special Element Injection</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Testing_for_IMAP/SMTP_Injection_(OTG-INPVAL-011)">SMTP injection</a></strong></li><li><strong><a href="https://www.owasp.org/index.php/Traffic_flood">Traffic flood</a></strong></li><li><strong><a href="http://projects.webappsec.org/w/page/13247005/XPath%20Injection">XPATH Injection</a></strong></li></ul>
+
+
+
+<h3><strong>BLOGS!</strong> You should read.</h3>
+
+
+
+<p>Lets Get Towards Blogs!There are Plenty of Blogs Shared By Hackers on Daily Basis That You can read to learn More and More……….</p>
+
+
+
+<ul><li><a href="https://blog.it-securityguard.com/" target="_blank" rel="noreferrer noopener">https://blog.it-securityguard.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fblog.innerht.ml%2F&amp;h=ATOHxyKfWaJCxgH9yN0wnleX3WusTZgN9hspDVhTSnFGE8wz1XrfIS4hUZgdJ-x-34VvTe4-L7EPnDXJQC0PhhjoTas2vThQkAe-iv2E8ElPZOQpWSAUtJsfvxziGNiNzvANaoJ4JoNC" target="_blank" rel="noreferrer noopener">https://blog.innerht.ml/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fbrutelogic.com.br%2Fblog%2F&amp;h=ATN21fxHYwdh7HbPmLepHzsv_pXXiNTTFzcmfx9X0h_qNwzR5N158i44KtA-Do2Q1KNzEYtCkGf1PJKllXtsxBeiakBkfAmk1n5rNml76sxzOrRtpfsOpsDtSpnfplriHv7KlMlsxGnH" target="_blank" rel="noreferrer noopener">http://brutelogic.com.br/blog/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fklikki.fi%2F&amp;h=ATOQsJ2nDeXdhzNATVh7GkH5WWLKDIU4vh0-dN1zMqroUBkby7AY1sSlJyjqU_c9HuN9kr3AJqVw72F3hClLJ-9pgWgzvywgZHWfu4Rpj9OSOiYxWWsRirEMDSecnpNeHxZBMBAebc_C" target="_blank" rel="noreferrer noopener">https://klikki.fi/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fphilippeharewood.com%2F&amp;h=ATPJqZPSTY5FhRzRJ1tJTUyRf1deUF2vwE0KpG4ejz9obOu_U4s7MB58xkLROd7kYMahhLOgrwqiqXomyNDb18gQRDLyD95lsllPsVlN6TdIcskLR9ayoxewczZWDzFuiA44Rigo414f" target="_blank" rel="noreferrer noopener">http://philippeharewood.com/</a></li><li><a href="https://seanmelia.wordpress.com/" target="_blank" rel="noreferrer noopener">https://seanmelia.wordpress.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Frespectxss.blogspot.com%2F&amp;h=ATMiSw21fW4i8qvZZ68mU6mqlm9CUr6EO1HbcNPUmHT0JwKmLFDEGSomqRuwSlaBxIJZ8-PXAdjfnq9lIf1qAE0RCFTh0AB7n-4k6Yqo-mEW5hbpKUrPX7wt0d9uAzqOSR8VG4_yurSv" target="_blank" rel="noreferrer noopener">https://respectxss.blogspot.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.gracefulsecurity.com%2F&amp;h=ATOhJCPG1dMebUvbcH6jAR2LzmwmK3QkiM-NDl1IbEK_ZUuI4pyUTO-06X-Q1U1JisxzrPgNyPuEgwxcRwkmqD5F2u8q1g1CMk_OOB8x2nYxlJKBBFEWfiOP4XiqocyjCascDJS5LyH5" target="_blank" rel="noreferrer noopener">https://www.gracefulsecurity.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwhitton.io%2F&amp;h=ATNUBqvaI0a5JNs8G4HsN1kGzmw1uH11641gW5XxX8BHsXE-zZBZDq7npGBGbzdxvWTkCvgwh0JsM3hwcRzrDGFcE2r9F2g7iABWxq30vjHfIlzF30-tBh6F5oneibm1yojrXw-o14ivG6iWnSQJrJCQ4w" target="_blank" rel="noreferrer noopener">https://whitton.io/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftisiphone.net%2F&amp;h=ATMe6ZTd40i6EW8GcLnVbRXAmF1RAFU-9mGHB66w3jCx8s2NexZ4EKOPnZqvElUsSOBOrt8izVXeo9mlNzFGUve9FIw_GDC13b6nCKALRRVPvJuKHEm2FK_uVF8trRoa_r8vl0mmJtRF" target="_blank" rel="noreferrer noopener">https://tisiphone.net/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Farchive.nahamsec.com%2F&amp;h=ATMyMRXcw8BwQm20vo8bJ3E0KosnGD8nKu6FebP3uXwBS1_-HK1x4MelVeahKvhgdnHVxMPoYHRtRoS-fTySgYqPw13T2Re9Y4eX2R2d6N4pcmMRjEIXIa6ujL-hmYIjBMZ1cDpfJoEp" target="_blank" rel="noreferrer noopener">http://archive.nahamsec.com/</a></li><li><a href="https://www.hackerscreed.org/">https://www.hackerscreed.org/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fdanlec.com%2Fblog&amp;h=ATMxa8PbuZYrFcPB8bq0taLmCk9aF_SHXFx1GaGfoUMV-zXeVOegYMVyKWGzzj8VHXQWkYlfMSgAf1uz42v7ztz_8Maz893ao3dSFWSu72NQUos1kz99-DWaY6nyjHmffXOltRz_BIyZ" target="_blank" rel="noreferrer noopener">http://danlec.com/blog</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwehackpeople.tumblr.com%2F&amp;h=ATPwyeIU87vaUbxyEU7QMUdyBqa-iBAUmUhxQ71Ag-i3LSpAI1O6uwlfhAcBXu1dw-POatLvA2Hy0HHS9hG9SvmXu6XgkB6o6kFHIrGIexfw3eWFF2Fi75tczxZrnrGMe3bsmzGSJLZ-" target="_blank" rel="noreferrer noopener">https://wehackpeople.tumblr.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fbitquark.co.uk%2Fblog%2F&amp;h=ATON4r9z_6xZRxRow5iFhHGL_GJ8yEGu0tSvDYDBh7LzEdaJdKX6DmFG7E8CHyz5dr3b9QEEPHUNT0GA-JJnC4_GSMo8PODxGxXVCw0vaydMbpy8ZbgzvRPPcLmRH5ctLGkkZWmH-HFn" target="_blank" rel="noreferrer noopener">https://bitquark.co.uk/blog/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.arneswinnen.net%2F&amp;h=ATPb30sZlAQYlV1N2ML4662Tk7mGF4LgeH6QlKJfkz82xPgRrNW-FuHUPqmAPFCs_yaa2B7OS0PoebSXCruqPos-TZQEBICTxy-m5P7VtejMemLZLdJwyH-PxIs7AsMQOtGTr0Twlu7l" target="_blank" rel="noreferrer noopener">https://www.arneswinnen.net/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fbugbountypoc.com%2F&amp;h=ATNMw3Y7odmgJbL6AiL91T7y9y3OH_YpinsZ2lq6rHyjAHHdRCZt4dLLWbnQ08ramrrfGmnhbAjWZBsVht7cr04NkJKztAeWUG7tdtopXe763q0xMLGcUf4x4bEl61s5dRI8fcwhrAQh" target="_blank" rel="noreferrer noopener">http://bugbountypoc.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fmedium.com%2F%40arbazhussain%2F&amp;h=ATOjzVbsDI_RKYsf-bjydyCTUfR6AocBqo5sgud93BfuUspNK6bATKJArgBDSeCRJRMc1Pms-Pi7qwnq2LR2dlzUwcWoQ3mBK9yu_c0YjS2P0IapePZnIMxoPTLB1xE0LDC2Zww3khB3" target="_blank" rel="noreferrer noopener">https://medium.com/@arbazhussain/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.shawarkhan.com%2F&amp;h=ATPEiqIEoD6PdB-KB4VVxmNfywoKMtwOPoPgqiBu3v04mSRca6K_Q0m97y6325MGk6qw9oJHWLQKZ18dkeHmEFR62kgG0xS6cJlseruJ1Hr2amhe0BMJWuIAXicB5u36IjE3qfihGLZe" target="_blank" rel="noreferrer noopener">http://www.shawarkhan.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fblog.detectify.com%2F&amp;h=ATOvSluQwg6K1oXPCpTd8uCmiYswHKgx6V2Y4xCWmgVxWWbyIjS4Xmg1YwFwVyQQrocKmGw7WZiTm6LVsQeMtaEZRZYBkaOuZvTqy0iyVlnQuoZBICLghjGng1P-OvK1L-2R-PsxtLGm" target="_blank" rel="noreferrer noopener">https://blog.detectify.com/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.rafayhackingarticles.net%2F&amp;h=ATN2nw16NkLIq-zHUNmhDFrr7-LPp0DfGkLsPYp3SRVVAK6HQSD_w-v7RIQWXdT4NoJkVtD_CRPhdQOzKymQWpiygAsph5BsYUiAmmqVEp57nc1eFjKWxSjL55iQQuTT3jRqTimSjzE6" target="_blank" rel="noreferrer noopener">http://www.rafayhackingarticles.net/…</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fforum.bugcrowd.com%2F&amp;h=ATNFdPZr5I0XutYC2_ybmAmYMbOM1jy0eCsNyKTvOaHXl8Rw_gGE4pxxOVTYqT5bHc9sOpdeGIQX536VZB1UJEuxLJ2MgnAYHAN9LDNU0jaFF3pelUHGF3Ie_d35L9D3_Y8lx_AaeeoM" target="_blank" rel="noreferrer noopener">https://forum.bugcrowd.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsecuritywall.co%2F&amp;h=ATNMXE64dHpWRYVzkUkd2K1G--sTSd2mCpS4Nr-CHZ-yPpt2vdlgJzoD-3Ksch8-ZiBbX8pBV8qGt0cHrkeQ7hrvM-ZXSa13OAYCAgecVxQOEWWLNf5Sff8-c7J2KEnTC1CQzaN1hOrF" target="_blank" rel="noreferrer noopener">https://securitywall.co/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.hackerone.com%2Fblog&amp;h=ATNQC0BgXgi_-8u5M0bKnvK0mVk9SsEDCb1LbaLS5cgRW6bawSKvHJZSwOknowoWs5Qx5DRJ9oKNoGF2OkfhgVFDBGi1jYd2RCenmk7WZrU1toG_jWTdiBNFlQIVfa-LoHjiOqzTflnz" target="_blank" rel="noreferrer noopener">https://www.hackerone.com/blog</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.securitytube.net%2F&amp;h=ATManyXe2-6w_Eh2wmmn6ahXVdCchmHL8um3rDYReuAFfqKMTOi1klt3irc_LGOXEogBNpiHpuNFlDsjtmcITGI4PhhyFX-WAAh7Vm1LZUXoy4n-6qWyGwU466TGejhPcNjteHF9nBPQ" target="_blank" rel="noreferrer noopener">http://www.securitytube.net/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhackasia.org%2F&amp;h=ATOUwJq851_jByLR-rvpADH0WCauyCOzyLkensdIeoH53ff-mz0qMcsHyXKCB5Jzvd987z45Pkd-lbGodQdnq8gaV1A3WthrKlkY_JLhq1PANGQvnQ03VQyzl3Kkap9myxBZ94gqVhwT" target="_blank" rel="noreferrer noopener">https://hackasia.org/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.gangte.net%2F&amp;h=ATMltzqh3Nm3kv11nkFRB1BE2hOkuV31uXW40o_tfH8eQ_CcmFE6Cs0a1WG9tsVBA1LImwSOMKtRe8JwbrZ1iDyhkkHjZFsae5CJ7gZ7EvFOdMrPecL2qW9msbP10nQU9ECPaXxWZ_sx" target="_blank" rel="noreferrer noopener">http://www.gangte.net/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fmukarramkhalid.com%2F&amp;h=ATNefYNf4aFyyg1j7tn6OxPDx3fK1zlyFgO1wcYkXwFqg7TBuhRNCO0V0Eabo09lRu840Ef_-BJu7j9rrxJRPL7v98rIP3aAP3zRYAFWb1sDx4XU76lVXF7RGtZXOjawzrBKGn6Pw3wo" target="_blank" rel="noreferrer noopener">https://mukarramkhalid.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsecuritytraning.com%2F&amp;h=ATOI0-e0AQvI-0uGZ31cSi-i0dlcFe8vndSOdwrnW9pGZyzGihuo2zKqiTAzWAQfIOk2cAF9zCq4Knrl4nEH8dGvlGUraENkO6-VmCJ-F05AcTMX2kTVeN2Efg_WW_E3xZ5y5tlnfWeL" target="_blank" rel="noreferrer noopener">https://securitytraning.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fjubaeralnaziwhitehat.wordpress.com%2F&amp;h=ATMqnVaGxhu8DLn9lQ21IwP6FEYnZId1lqEzKQmMM6TVN17rZfxTSQByR9dBHxQ1GYRfMyl-RKQCaYSK4yjGnxi35lVm9fU-xZEpFXoubeYemVRWChqNwiiQMVy6ujAkagWBw26KXyu3" target="_blank" rel="noreferrer noopener">https://jubaeralnaziwhitehat.wordpress.com/…</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fhackaday.com%2F&amp;h=ATNcWpOmzwM8FDzCyoccbCrOQ7Pz5A846OGFDBuOOCRS3oGQUBZwf8x3VAQe8nzSuON1bVYilgsU0Gk6PDXZMwt06mpiJmsYfx98_7-Hn0vQ_oGjzpKXNEvYpTTUyw1RuC5qhTzvkniw" target="_blank" rel="noreferrer noopener">http://hackaday.com/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.securityfocus.com%2F&amp;h=ATPBP8vy30QcHfTU7XrcjjJ4qq9RmyDGcpC92W0E5QhZSUAiAIkd4AVuclviAKRchXloxpwVWzyebKGufAWjcSIwePcM4qlNb4FcQLxB2-FX65x-RsxHR5TO2JhvK7AfIkk45yna1LWm0iYM0mGSIRfQ0w" target="_blank" rel="noreferrer noopener">http://www.securityfocus.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fpacketstormsecurity.com%2F&amp;h=ATNINYq9sAr_Ty2PCqJaCKnmTLSE7tSPudVwLoYaT6Y43OZit88CqOJsotTj0DyNZZ54Rhrd0wbTkco7BeFb5wZC9IvTSPXixNiWB9UlbC6HY3MVVkKTdZduWgVQsYGJ2UmgON5hoFLS" target="_blank" rel="noreferrer noopener">https://packetstormsecurity.com/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.blackhat.com%2F&amp;h=ATO8ySZCRTmfmFWctsNPajHreUZA2liLTCT7_ZV9DwLGFhQoG9mHDQo-u4NeM9OlPFgTlDgduMuAy8Pcou-maW1mzK-W_pvQm7AyExHbGI7SmPUl28WC3Ax2UPi8MwDQjczQm-_n3D8R" target="_blank" rel="noreferrer noopener">http://www.blackhat.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.metasploit.com%2F&amp;h=ATPydDvQtiKEjwWpBe9UX-cCAOyF-W4WOXKOYveXdacpXKBWu_9ej2tIfOwErR7RykYgAC6AqYzTHS_yEO6z-W-7QWJVUOPFPBaeYyuyQwxlHTz0PN9u285VplGVoWh6GwTav1rWkdag" target="_blank" rel="noreferrer noopener">https://www.metasploit.com/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fsectools.org%2F&amp;h=ATN0b3xQkgTwB3FxtTPDdzgDEmkQiOk-YoZg7UWP5JXZRVL7eJ8nN2xpZTciAUFp_OrAfJawO2R00RqIUx0yORCsdelHgTyEnZvAHpaY_JVXjoeqCFdDcnct6qjwHp7j-OvZ4v3qdWJI" target="_blank" rel="noreferrer noopener">http://sectools.org/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Flabs.detectify.com%2F&amp;h=ATMgAp_vxmSVaeA5XX31UyWiCRHmvII87T4v64FCnqu06sV2KNOQZmvl6vsRJh4imf4JPRorl6BcNuwQ2W-dnkxuYuBup9ENxVHt5MKERDc3Atf1dWOZysfRe85hlOYYm9s28tl3Gb0S" target="_blank" rel="noreferrer noopener">https://labs.detectify.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fblog.rubidus.com%2F&amp;h=ATNC0jdvuCCGGYyg5dJQO-NrVaOGCbOn9HT06m0Ad95QHUbIpLUpJHJlMvbmz8JhNqo1f65zVH7rTdb6DPN3TW5X2xbnNJGyfNAP5yA-xrQrnn_9PkmY3oYQYn-DjvBoGhJd9rYI5ogb" target="_blank" rel="noreferrer noopener">https://blog.rubidus.com/</a></li><li><a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.securityidiots.com%2F&amp;h=ATMqKhLRQ_iw1CY3g8XpHBLDFTetno5eR_tgdjooJCYPbuXwoDzAIabdZ_iLllPr24DnLW2T7ycOP0np3Vu9gHX0Ag76wQW4AxrGbdctSdMb3vFT5w7dWaIQr3Fkyb7aIGEWA993N1sc" target="_blank" rel="noreferrer noopener">http://www.securityidiots.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhackernoon.com%2F&amp;h=ATNJcgp3N6PzGeXYAYfI6B1yXSqHMn0JcN_e7eHG_KXf2Z6rg7gt3E5WqQFb78VQ6nif3MOuefX8YhXV_fyBk_DNlaOpGyEGSABIXwNPPgDWGq8WFqTlAroDVLoqylXeehpwBRrB1etO" target="_blank" rel="noreferrer noopener">https://hackernoon.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsqli-basic.blogspot.com%2F&amp;h=ATM4v_5BMgvAjSCevDLp28DQ5smzg7ETgRvBJbsg6z69h8WLb8pyicnKKSnVYCgYxmvCOJiJWy0gecw-a3cgLLdv78bKPG1Rnbzyzzr98RZQSXr90HCmA2ZB0W2GvVT8RJvMFzuKQwo-" target="_blank" rel="noreferrer noopener">https://sqli-basic.blogspot.com/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fbugbaba.blogspot.in%2F&amp;h=ATMstvXqiLCsoo2Ui-A0qSrUIKxknu7nJTPyKmJKDfCFggqHIsmk5zp9Gy8v2n-Taaau2p3IFpObL4OmIyBCLiY_YwVmhzPHJCBlt2UzUVae7x3zw_2UUJDpXGhVXeFwZqoEnP46cntt" target="_blank" rel="noreferrer noopener">https://bugbaba.blogspot.in/</a></li><li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fvulnerability-lab.com%2F&amp;h=ATN9nmEZ3ieEMuT7gegO7_dvr2a1U54q6Zz-46LBJFTt3scBoim08GqYOVUDrvHzxw8AabuS27yavBqCOL0pd9pePXgj1j8sYp0YEzbCFZUamph7PlCrS1Qv32Tucvxc2YNw5j5J-rWc" target="_blank" rel="noreferrer noopener">https://vulnerability-lab.com/</a></li><li><a href="https://medium.com/@know.0nix/">https://medium.com/@know.0nix/</a></li><li><a href="https://medium.com/@codingkarma/">https://medium.com/@codingkarma/</a></li></ul>
+
+
+
+<p>These are some Of the Websites That I like to Visit regularly to b updated and Read Their Articles………. There are Plenty of Other Blogs, Websites That are Missing from This List so be sure to add them In&nbsp;comments.</p>
+
+
+
+<h3><strong>YouTube Channels!</strong> You should follow.</h3>
+
+
+
+<p>Now Lets get Towards YouTube Channel Links… These Channels are Shared By Hackers where They Upload their Video POCs.. Watching them u can actually understand how to demonstrate these type of attacks …<br><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCPPAYs04kwfXcHnerm_ueFw&amp;h=ATNQDVlKetle_Mkhwwk5KBxkEhzFhXt4unCxLXesbjG4vrruJk5z0CPXH38o0ZAYELff2OJ2xxv52w-N5RuBV1of-I9h5xU0EcaTX586DP8x3EUQktQ9HQ6xCZjpx5bnF6tq1qNql_u5" target="_blank">https://www.youtube.com/channel/UCP…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCJ6q9Ie29ajGqKApbLqfBOg&amp;h=ATPsP-uGbtPkrVSIeU_z21HwWcan8VCAbmThlVOHKhp59BvvtEGFciS4MglXs-VyaTuS6KIh0OoFnF10oQA0V1i9-yzXv-wEp0awF1bltY5l7pm031ZBorgrePQDnbRYtoOY_TyB-ShT" target="_blank">https://www.youtube.com/channel/UCJ…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCRFG_j0cgLWtJOG6fl_-rxQ&amp;h=ATMxqmGkTMNQPI9frMJTVfQWveVXpkW0XMmt8OM_JkQqzwXz07dQ8dfVsLECgsvrA_TaKL_3JXDgtdFQdXxPh3blCNEFS8W0y2x2yYJmBLHxHjb3oz_BEnCpLSHIUoNY33oW1VkpYewO" target="_blank">https://www.youtube.com/channel/UCR…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCYTK8lk8oLLaA330rqd0qgA&amp;h=ATNd36z0teHM7Mai8DS1erq_IPg1kCOX2rVkYpB5p8rQo_9R1AbtmWFvMCaD_ybDhhLXNMhJtnhEZDnA41-v7D3Nc_CFkvij8moxFZFzbzThWxdFR0SLgNg9JIcaKQ_f9wO4hFk3i_Sp" target="_blank">https://www.youtube.com/channel/UCY…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCwfYw-C2xqemqrXq0IKF_Mg&amp;h=ATONF1t3ptYAzAyhbEX3CgVvgYmgjKyph0rdYp95oqyyha8wYIbH1c80YNZ6zntRjshxB4MjpYcQWy4deICg85S1p_QdhC5tqSli0JjoqfZVBkDj5pj1LWudKBXgHoBKfy_mXm9lJ1f2" target="_blank">https://www.youtube.com/channel/UCw…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCa0tvIaVilNAshcI-24AFdg&amp;h=ATPSRL4NsRHik8t_r0hXNvuYQ_GYdMLlOB_b8f70oMmbcUvrSra9RSHF91mLSKoAUahMeRNOeuHt1TgbQQr88OFs73RJjav_6Yv9B5cBMkmvMZEfd8mbSnuBfs6Mygga7CHUdW_YbDA1" target="_blank">https://www.youtube.com/channel/UCa…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCtLT_s49tKrcJEfnYX-qJAg&amp;h=ATNfu-hdPiIYwl3PQA3ScVdcUM86jF6NzQZtR3C75F0zAbxVB4Fe5vNCh4qqyIv3RR9ObDiqwKnv244fXu8gKXiGRh9F3l7_hVhlnPLgP1ivBwYDn91fzxLSOYbFhE9oIiW2L7aUrRxa" target="_blank">https://www.youtube.com/channel/UCt…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUC59IHQcCmgNw4GIvsXeLnDQ&amp;h=ATN81FtLoefPCXtTZBaXXoPyRRwv_l0p4rJ6KsRRcn8YMFUNX4L04lfQPWeGdX8mHKgm7MfOG3CyId9j6kAxCMgG3d5MJvSL_3q7jESccP8-ovOQwMMG8-2LqOrjSqhGJ0IjzDMXIuqs" target="_blank">https://www.youtube.com/channel/UC5…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCMb5eIyahPJS0YgQc_Kf1vQ&amp;h=ATNMMz7Uh9Aau1rXcKdw5WQcEKQBLXjaZG-XQxl3aTTZfGjaWLVD27itTq2GzC8aUuyfZD654xnSQxUmPcpfBDlpWvvg3gJtQWbfPVDyUyggNgB3al2_oD12fO3T8cLX04jTedTUuv5g" target="_blank">https://www.youtube.com/channel/UCM…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUC_jNs1biBixcQeSUoJxvNLw&amp;h=ATNAw0NCg2ys-GcTOTkzMDG-4YFhVApctvajl89UaUXj3GXw6Xmbbty1QlFLsiWII1In8vv5c1fxPLFgSvqHcSjYHWcGHbDWY4FArDjUm8yXHtmkE8u-N62d_T6w0GeidHk8o1KWFj3t" target="_blank">https://www.youtube.com/channel/UC_…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCqH9rDGM_5LMFwx96PUXmRA&amp;h=ATMc6_VcQWNlHZKACce1Ba0bsfJ5ghi2meFL_luT6Fn94yNmmGSkraMO2eB5Z9EyqsuyYcfj0W4IN9Oo-K_rsvFtFH3dRITjxh7I5QQWORRz3t7QsXw8BMBqmfcEP9dsCfWs28ZAYgOL" target="_blank">https://www.youtube.com/channel/UCq…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCV89UhUtxqwP0j4o9tMipsA&amp;h=ATOSHbLDxswkwE149Qql7AfHk1QkicBWRvdKRySbWReTBhRhKT8Vve1trTPv2HpiRHGVh8wV2nyQk7V7DHKK2WlEfAaXhKbpMedpR6nH-ErtwzNKEa2kDvxQulODDBDORPhBuA2xtYI-" target="_blank">https://www.youtube.com/channel/UCV…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCsgzmECky2Q9lQMWzDwMhYw&amp;h=ATPeT5sRWTeOILrCmlCxp6jghkVkWqoExY2RqZFJ3TN6dTeoVa8B2I9ZDmKnaso3kx6klBVAtB0G8Gi0DqZ_xZVJQLJacis3DFcJ7cUVo8jUOvASdKhytlW5amOXgLzGOxE4MlssvU4l" target="_blank">https://www.youtube.com/channel/UCs…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCaftcKRiJJW0AJHmR1E5MAQ&amp;h=ATPTWzZR6xxVjP3MqTKTF-yUKiCkEG6OVicaMg4hsElejdDCAOt0WzUVTFBmCxIbBoI-IhwrfX3I0qtTI_YvXEYYDu75KN4m44SJ4Cj8ZziowF5zh-OXLXCDWNsIkrCDyqIwjikAUfYG" target="_blank">https://www.youtube.com/channel/UCa…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCPxJLZCoIRJHs1VebWeaByA&amp;h=ATPsFvSeNDxACjYn33kYybYaRDgExSJ0igqSLTTUJmtz_hfXniapAu5mxr5kbO6y-mXwTM2BtnCh8TX-ki8Ey1r1c-5L02-n-pNPJeo-CnBxa8_1fndEmph0XM4IjcMW0SsdOIwj5jBr" target="_blank">https://www.youtube.com/channel/UCP…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCXsjr2nPZ1zMFlgqb1zwKpA&amp;h=ATMU_7Va9AEamYGwO6rmlSbuFBbMGaAdpghai2V8zqNX3nYPge8gDts5mazti_ISF9rHkhCWR0Pad7GQ1ruaGb_w_hAdFNOOJaNRlhsUBm32ErRC6GQnoOBst2bitSqQEJ_1ronQWq_hagpfi8wH8X8OYA" target="_blank">https://www.youtube.com/channel/UCX…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUC4QJ7X4nnkAYXsnFQpdytcA&amp;h=ATMt3ZmUznvSzgv9GkSwZ16QmdRCrNPUzwMKuGSDYAh92GljGmoRb6NRay34kX5Os3AhdXsYTs_aez3-huCu_EIroM77cBZ2xW-UlgiPALWoqyc77OdZEpYHGhXE71PPgC-0vtl6LzAYUYMQ3PPC5asQAQ" target="_blank">https://www.youtube.com/channel/UC4…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCs2NmJGRecw_huNzvQNf2_A&amp;h=ATPUl777znCvLtX80X9yPZQL6M2mmX_bjKKXW0iiozNYurWXXmqLwav2LQHoT4T15p81x1DkFxV38JEg2CRvHj3vi73CKEQd_rKN9g1TIfEsKt5KywwmEXn0vCfcM4RuUoaVV3B8gH_0" target="_blank">https://www.youtube.com/channel/UCs…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCo1NHk_bgbAbDBc4JinrXww&amp;h=ATMbfJII7XSdOqsQDzDZMvEVkTEkbkkVZ9rXDexxgEvoKPhPPrtP7zVXBjDZAxjdctUtaSHP0v5hDubQCNla7LqzNSfO2FHELCRXmURnYTTmgR5ZLvf6G2wtxlFD506AcP4aHGXy5zgI" target="_blank">https://www.youtube.com/channel/UCo…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCyRTTbb7I4GdDCAoGpjoqdg&amp;h=ATNZAtFje221FBYvawcFsQfuXQ1fKG2X_AakOTlvG0PVWvk-uKFNH3zq608fojmO69LEx3fFlAj0bEmAI6qitsIA3lbxMQg60V-9fNHK42p7fNVKKT54sQk2b2I9dRu-Z7nlpHubFKb9" target="_blank">https://www.youtube.com/channel/UCy…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCS0y5e-AMsZO8GEFtKBAzkA&amp;h=ATOvingxqMm0-GgUPbNYFHXLiQM7iJXwcNqiGTCpWNxZMezJtJu7hV3wE_WJKdKfRnblDuvWFtqwZ5gLrdMv7GY38AF20IIgzun4zJHtiivzjiSmUpUMlrRCK9jNdpWX7g6WM2voJA2O" target="_blank">https://www.youtube.com/channel/UCS…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCOQtLXVJduZ4-YUFOi5EzIA&amp;h=ATOSwkoywbP4Q9Xa_oa1nt5sdLHenji0TSa5mWfWZ-yQq4jQXU8CUhsITNcy0LWwIhpqnvuK-erLELJqqlpBfjNjjXIydAqv0E858kT6rSFbqqGBtP4v0TEilHrUQ_t8-vVJsfxmrtch" target="_blank">https://www.youtube.com/channel/UCO…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCh5MTJLt3LYr_rkwcOQJNWg&amp;h=ATOKivULHD9WUu6LQXY6KK13InD1GNParhmlYG-3jPwk9NPo7ToG6Nyb-RXIlF0dFwYYwQo34GG9DXXMch3JJJcTwAgF7j9rE_CblV9ACeGBtPI1vpCa1wYcZ-mZBlCg4Z6goZq8P99A" target="_blank">https://www.youtube.com/channel/UCh…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCou-7r8Mk4oQcBmazxp5uwg&amp;h=ATNYkCk4NLcVYPBMVZQXI4oJS6LuMNsCPT2ZQ-nZ7mjqjT9n2A7IRNyLcr7bXSSSU2IJIA2V_WQFVeunhdh7PWqpOhPFzrJ3RKqlF1KOiMZLB6DRfQopApsFakxDd0sREXplZB8cN8_q" target="_blank">https://www.youtube.com/channel/UCo…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUC9gcFaGnsI9nEh0CmTfFPCg&amp;h=ATOS_Qajifodd3D5fzTLCEsrvYqFRY66R_YbhxNbNmkEf3yDCLAR8fmXohNAhyXb5MzvieAPy8ZX_MdCEYgMBwhMwCvvnb1leFzbil8fkD7H5jgIQTBX7CItxNzhFaNLhDx5YYNvncEa" target="_blank">https://www.youtube.com/channel/UC9…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCen55zu4U3XaSUuXSWPwjIA&amp;h=ATPC3CqpxVm7cemX1HExaijTBYBDz8WVLPqzG0d69ME2Hv1nFJ8ZdvuNlE_80r6kwXuqBqNW1_jDTtl1mmEdjzMOw1VPhMCloGtQOVA_-0f9xDqmFcnt-thQZjtuYUZHAxtj1ZeE4O4c" target="_blank">https://www.youtube.com/channel/UCe…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUC286ntgASMskhPIJQebJVvA&amp;h=ATMnQt9LR2Z4YlvrKAfW8emTYUnKzsfM2yx06KzrlV85P8CV9975GsuhgwTmcc-ilXbYjbXlvO7oN4WSqrh5WF92EA16j6xxlf-cuICBNdmaUXBwNEjFFCM6yxWm0Ivzv9jh8MDWUrER" target="_blank">https://www.youtube.com/channel/UC2…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCPSPMTol8NmmJrEFyHaVgfg&amp;h=ATOynMGasCjk2q5znCHEEVbV5gSxdqSq4eBv6wfKJtktVLYJYfPvwpKk95ziBR1ZBm7kOtmG1Tw8LHWLV5DYqwUQV_LL6tZEaJAhbJxPADXGw7w_j-mWuKB1Kc39yOZdzYyAwchYSezr" target="_blank">https://www.youtube.com/channel/UCP…</a><br><a rel="noreferrer noopener" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCzSAhv3ZpXfRsZJuysN3ECw&amp;h=ATPRAMJN2VRbgwaSitAuUl_0qzhR4fspXaPizYenx2kkAGyTzt0Sbi5zZSwjAD2RyRv5Fd-EGLZFrUrrE3n6IatKET8NDjtLYUrOSMWY7WAr79WWowSOaf9k8vJ2y8Gbm6ZqbnwNpSwF" target="_blank">https://www.youtube.com/channel/UCz…</a><br><br>Any Channel Link Missing? Kindly add it in Comments</p>
+
+
+
+<p>Another advice…… Regularly follow&nbsp;<a rel="noreferrer noopener" href="http://h1.nobbd.de/" target="_blank">http://h1.nobbd.de/</a>&nbsp;to b updated with&nbsp;<a href="https://hackerone.com/">HackerOne</a>&nbsp;Public Bug reports You can learn alot from them</p>
+
+
+
+<p>Alternatively You can Join Slack Community for Hackers<br><a href="https://bugbounty-world.slack.com/">https://bugbounty-world.slack.com/</a><br><a href="https://bugbountyforum.com/">https://bugbountyforum.com/</a></p>
+
+
+
+<h3><strong>Tools</strong>! You should try out.</h3>
+
+
+
+<p>dnscan <a href="https://github.com/rbsec/dnscan">https://github.com/rbsec/dnscan</a> <br>Knockpy <a href="https://github.com/guelfoweb/knock">https://github.com/guelfoweb/knock</a> <br>Sublist3r <a href="https://github.com/aboul3la/Sublist3r">https://github.com/aboul3la/Sublist3r</a> <br>massdns <a href="https://github.com/blechschmidt/massdns">https://github.com/blechschmidt/massdns</a> <br>nmap <a href="https://nmap.org/">https://nmap.org</a> <br>masscan <a href="https://github.com/robertdavidgraham/masscan">https://github.com/robertdavidgraham/masscan</a> <br>EyeWitness <a href="https://github.com/ChrisTruncer/EyeWitness">https://github.com/ChrisTruncer/EyeWitness</a> <br>DirBuster <a href="https://sourceforge.net/projects/dirbuster/">https://sourceforge.net/projects/dirbuster/</a> <br>dirsearch <a href="https://github.com/maurosoria/dirsearch">https://github.com/maurosoria/dirsearch</a> <br>Gitrob <a href="https://github.com/michenriksen/gitrob">https://github.com/michenriksen/gitrob</a> <br>git-secrets <a href="https://github.com/awslabs/git-secrets">https://github.com/awslabs/git-secrets</a> <br>sandcastle <a href="https://github.com/yasinS/sandcastle">https://github.com/yasinS/sandcastle</a> <br>bucket_finder <a href="https://digi.ninja/projects/bucket_finder.php">https://digi.ninja/projects/bucket_finder.php</a> <br>GoogD0rker <a href="https://github.com/ZephrFish/GoogD0rker/">https://github.com/ZephrFish/GoogD0rker/</a> <br>Wayback Machine <a href="https://web.archive.org/">https://web.archive.org</a> <br>waybackurls <a href="https://gist.github.com/mhmdiaa/adf6bff70142e5091792841d4b372050">https://gist.github.com/mhmdiaa/adf6bff70142e5091792841d4b372050</a> Sn1per <a href="https://github.com/1N3/Sn1per/">https://github.com/1N3/Sn1per/</a> <br>XRay <a href="https://github.com/evilsocket/xray">https://github.com/evilsocket/xray</a> <br>wfuzz <a href="https://github.com/xmendez/wfuzz/">https://github.com/xmendez/wfuzz/</a> <br>patator <a href="https://github.com/lanjelot/patator">https://github.com/lanjelot/patator</a> <br>datasploit <a href="https://github.com/DataSploit/datasploit">https://github.com/DataSploit/datasploit</a> <br>hydra <a href="https://github.com/vanhauser-thc/thc-hydra">https://github.com/vanhauser-thc/thc-hydra</a> <br>changeme <a href="https://github.com/ztgrace/changeme">https://github.com/ztgrace/changeme</a> <br>MobSF <a href="https://github.com/MobSF/Mobile-Security-Framework-MobSF/">https://github.com/MobSF/Mobile-Security-Framework-MobSF/</a> Apktool <a href="https://github.com/iBotPeaches/Apktool">https://github.com/iBotPeaches/Apktool</a> <br>dex2jar <a href="https://sourceforge.net/projects/dex2jar/">https://sourceforge.net/projects/dex2jar/</a> <br>sqlmap <a href="http://sqlmap.org/">http://sqlmap.org/</a> <br>oxml_xxe <a href="https://github.com/BuffaloWill/oxml_xxe/">https://github.com/BuffaloWill/oxml_xxe/</a> <br>XXE Injector <a href="https://github.com/enjoiz/XXEinjector">https://github.com/enjoiz/XXEinjector</a> <br>The JSON Web Token Toolkit <a href="https://github.com/ticarpi/jwt_tool">https://github.com/ticarpi/jwt_tool</a> <br>ground-control <a href="https://github.com/jobertabma/ground-control">https://github.com/jobertabma/ground-control</a> <br>ssrfDetector <a href="https://github.com/JacobReynolds/ssrfDetector">https://github.com/JacobReynolds/ssrfDetector</a> <br>LFISuit <a href="https://github.com/D35m0nd142/LFISuite">https://github.com/D35m0nd142/LFISuite</a> <br>GitTools <a href="https://github.com/internetwache/GitTools">https://github.com/internetwache/GitTools</a> <br>dvcs-ripper <a href="https://github.com/kost/dvcs-ripper">https://github.com/kost/dvcs-ripper</a> <br>tko-subs <a href="https://github.com/anshumanbh/tko-subs">https://github.com/anshumanbh/tko-subs</a> <br>HostileSubBruteforcer <a href="https://github.com/nahamsec/HostileSubBruteforcer">https://github.com/nahamsec/HostileSubBruteforcer</a> Race the Web <a href="https://github.com/insp3ctre/race-the-web">https://github.com/insp3ctre/race-the-web</a> <br>ysoserial <a href="https://github.com/GoSecure/ysoserial">https://github.com/GoSecure/ysoserial</a> <br>PHPGGC <a href="https://github.com/ambionics/phpggc">https://github.com/ambionics/phpggc</a> <br>CORStest <a href="https://github.com/RUB-NDS/CORStest">https://github.com/RUB-NDS/CORStest</a> <br>retire-js <a href="https://github.com/RetireJS/retire.js">https://github.com/RetireJS/retire.js</a> <br>getsploit <a href="https://github.com/vulnersCom/getsploit">https://github.com/vulnersCom/getsploit</a> <br>Findsploit <a href="https://github.com/1N3/Findsploit">https://github.com/1N3/Findsploit</a> <br>bfac <a href="https://github.com/mazen160/bfac">https://github.com/mazen160/bfac</a> <br>WPScan <a href="https://wpscan.org/">https://wpscan.org/</a> <br>CMSMap <a href="https://github.com/Dionach/CMSmap">https://github.com/Dionach/CMSmap</a><br>Amass <a href="https://github.com/OWASP/Amass">https://github.com/OWASP/Amass</a><br><br>Any Import Tool Missing Add in comments&#8230;</p>
+
+
+
+<p>This was as much as i can think about sharing with you guys related to Web app Security in tools and vulns i have added a few things about mobile apps but the following sections contains some references you should definitely  go through if you gonna join the mobile app security gang as well.. </p>
+
+
+
+<h2><strong>Mobile App Security</strong>.</h2>
+
+
+
+<p>So hello to Mobile App Security section now let me clear this first i&#8217;m a complete noob at this section so it won&#8217;t be as detailed as the web app one.</p>
+
+
+
+<p>Now The best and the very first thing i would suggest is to actually learn about Development phase of an app mainly my focus is Android APPs ( doesn’t necessarily means that you should go for learning to develop an android but at least get to know. For this You can go through the following Android App development tools. (My suggestion is you should actually give basic time to these) <br><br><a rel="noreferrer noopener" href="https://developer.android.com/sdk/index.html" target="_blank">Android SDK</a> ~ The Android software development kit (SDK) includes a comprehensive set of development tools. These include a debugger, libraries, a handset emulator based on QEMU, documentation, sample code, and tutorials<br><br><a rel="noreferrer noopener" href="https://developer.android.com/sdk/index.html" target="_blank">ADT Bundle</a> ~ The Android Developer Tools(ADT) bundle is a single download that contains everything for developers to start creating Android Application<br><br><a rel="noreferrer noopener" href="https://github.com/Stericson/RootTools" target="_blank">Root Tools</a> ~ RootTools provides rooted developers a standardized set of tools for use in the development of rooted applications.</p>
+
+
+
+<p>Now if you have gone through them let&#8217;s get towards Mobile app security vulnerabilities For this i&#8217;ll suggest you to first go towards <a href="https://www.owasp.org/index.php/Mobile_Top_10_2016-Top_10">OWASP Mobile Top 10</a> Giving them a good overview will definitely worth it.<br><br>I&#8217;ll also Highly suggest these two Books specifically for Android &amp; IOS app testing<br><br><a href="https://www.amazon.com/gp/product/1118958500/">The Mobile Application Hacker&#8217;s Handbook</a><br><a href="https://www.amazon.com/gp/product/159327601X/">iOS Application Security: The Definitive Guide for Hackers and Developers</a></p>
+
+
+
+<p>For Mobile Applications i&#8217;ll share Two of the Best places i&#8217;m currently following to learn and i would highly recommend you guys to have a look at them and giving them a proper read will definitely help you  </p>
+
+
+
+<p class="has-medium-font-size"><strong>Application Security Wiki</strong>:</p>
+
+
+
+<p><strong>Application Security Wiki</strong> is an initiative to provide all Application security related resources to Security Researchers and developers at one place.<br><br><a href="https://appsecwiki.com/#/"><strong>https://appsecwiki.com/#/</strong></a></p>
+
+
+
+<p class="has-medium-font-size"><strong>Learn IOS Security</strong>:</p>
+
+
+
+<p>IOS Security Guide to learn and test by <a href="https://twitter.com/prateekg147">Prateek</a><br><br><a href="http://damnvulnerableiosapp.com/#learn">http://damnvulnerableiosapp.com/#learn</a></p>
+
+
+
+<h4>owasp-workshop-android-pentest:</h4>
+
+
+
+<p><a href="https://github.com/OWASP-Ruhrpott/owasp-workshop-android-pentest">Learning Penetration Testing of Android Applications</a></p>
+
+
+
+<h4><strong>Mobile Application Penetration Testing Cheat Sheet</strong>s</h4>
+
+
+
+<p><strong><a href="https://github.com/tanprathan/MobileApp-Pentest-Cheatsheet">The Mobile App Pentest cheat sheet</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/mirfansulaiman/Command-Mobile-Penetration-Testing-Cheatsheet">Mobile penetration testing android command cheatsheet</a></strong></p>
+
+
+
+<p>Summing up the Phase #02 of this blog i think by following these resources at and giving them good time one can get pretty good at Bug Hunting..<br><br>Here are some Websites or Places where you can play CTF Challenges and practice your skills that you have learned.</p>
+
+
+
+<ul><li><strong>Hacker 101</strong> <a href="https://ctf.hacker101.com/">https://ctf.hacker101.com/</a></li><li><strong>Hack the box</strong> <a rel="noreferrer noopener" href="https://www.hackthebox.eu/" target="_blank">https://www.hackthebox.eu/</a></li><li><strong>OvertheWire wargames</strong> <a rel="noreferrer noopener" href="http://overthewire.org/wargames/" target="_blank">http://overthewire.org/wargames/</a></li><li><strong>Pwnable.tw</strong> <a rel="noreferrer noopener" href="https://pwnable.tw/" target="_blank">https://pwnable.tw/</a></li><li><strong>Vulnhub</strong> <a rel="noreferrer noopener" href="https://www.vulnhub.com/" target="_blank">https://www.vulnhub.com/</a></li><li><strong>Troy Hunt &#8220;</strong><em><strong>Hack Yourself</strong></em><strong> First&#8221;</strong> <a href="https://hack-yourself-first.com/">https://hack-yourself-first.com/</a></li><li><strong>Hack.Me</strong> <a href="https://hack.me/">https://hack.me/</a></li><li><strong>Hacksplaining</strong> <a href="https://www.hacksplaining.com/lessons">https://www.hacksplaining.com/lessons</a></li><li><strong>Penetration Testing Practice Labs</strong> <a href="https://www.amanhardikar.com/mindmaps/Practice.html">https://www.amanhardikar.com/mindmaps/Practice.html</a></li></ul>
+
+
+
+<h2><strong>Other Resources:</strong></h2>
+
+
+
+<p>I saw a few friends of mine shared some really interesting and important  tools, &amp; resources so i decided to add them here as well because I&#8217;m giving some good time to them nowadays.</p>
+
+
+
+<p><strong><a href="https://github.com/OpenSourcePentest/tools">Tools used for Penetration testing / Red Teaming.</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/GoVanguard/list-pentest-tools">List-pentest-tools: A curated list of network penetration testing tools.</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/lavalamp-/password-lists">Password lists for use in penetration testing situations, broken up by TLD.</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/Voorivex/pentest-guide">Penetration tests cases, resources and guidelines.</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/AnasAboureada/Penetration-Testing-Study-Notes">Penetration Testing notes, resources and scripts</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/vitalysim/Awesome-Hacking-Resources">A collection of hacking / penetration testing resources to make you better!</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/b1n4ry4rms/RedTeam-Pentest-Cheatsheets">RedTeam-Pentest-Cheatsheets</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/executeatwill/OSCP-Treasure-Cave">Collection of OSCP study material &amp;&amp; tools.</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/Elinpf/OSCP-survival-guide">Kali Linux Offensive Security Certified Professional Survival Exam Guide</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/OlivierLaflamme/Cheatsheet-God">Penetration Testing / OSCP Biggest Reference Bank / Cheatsheet</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/CyDefUnicorn/OSCP-Archives">An archive of everything related to OSCP</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/nairuzabulhul/RoadMap">GitBook: OSCP RoadMap</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/mantvydasb/Offensive-Security-OSCP-Cheatsheets">OSCP Cheatsheets, Pentesting / Red Teaming Tools and Techniques</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/mohitkhemchandani/OSCP-Complete-Guide">How to prepare for OSCP complete guide</a></strong></p>
+
+
+
+<p><strong><a href="https://github.com/anandkumar11u/OSCP-60days">OSCP All Tools are Here &#8230;!!</a></strong></p>
+
+
+
+<p>I hope the Path Guide i&#8217;m trying to share here clears doubts for many newcomers in Bug Bounty Hunting. Let&#8217;s move to Phase #03</p>
+
+
+
+<h2><strong>Phase #03</strong></h2>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://i0.wp.com/ftp.osuosl.org/pub/aqsis/images/phase/phase3.png?w=700" alt="" data-recalc-dims="1"/></figure></div>
+
+
+
+<ul><li><strong>Phase 03 is All about Selecting a target, getting started to test and after finishing testing writing a good report about the issue you have found</strong>.</li></ul>
+
+
+
+<p>Hey so Now the Final Phase i have in my mind is for People who have gone through all the good important stuff and now are testing.. so i&#8217;ll like to give my advice about a few things and then will sum up this blog.</p>
+
+
+
+<h3>Selecting and Approaching a Target?</h3>
+
+
+
+<p>One of the most import things in Bug bounty Hunting is to Select a target that you’re going to test. This basically depends on ones mood, experience and skills one can take a look at a target with a huge scope having 4-5 websites will all subdomains inscope and a few mobile apps and test start testing them or just one domain &amp; one app with a good app having a lot of features to test.<br><br>One can go to <a href="https://bugcrowd.com/programs">https://bugcrowd.com/programs</a> or <a href="https://hackerone.com/directory">https://hackerone.com/directory</a> and look for a program accordingly or either individual  programs like Google, Facebook or ebay. </p>
+
+
+
+<p style="text-align:left">Approaching a target to Hunt is an easy task you just need to be careful with what you’re doing it all depends on you.. for me i usually do recon at first by going through domain history, links, IPs, &amp; WayBack Info of the site. <strong>Don&#8217;t forget to keep notes of everything you do</strong>, now basically after the basic recon process thats i used tools and stuff for or somethings have to done manual.. I start hunting, i take a particular functionality/workflow in the application and start digging deep into it. I do look for low hanging fruits or surface bugs. There is no point focussing your efforts on those but keeping track of them is really helpful. I Observe this workflow/requests via a proxy tool such as Burp or Zap. Burp is actually the only tool I use for we or android app pentesting I mainly .Create multiple accounts because I want to test the functions being sent from one user to another. If you haven’t been provided multiple accounts, ask for it. Till date, I have not been refused a second account whenever I have asked for it. or sometimes create them easily. Just work with the app flow and keep testing look for weird behaviours of the app try changing things in them but remember finding an app working weirdly isn’t necessarily means you have found a bug worth reporting but i would suggest you to keep digging and try to actually find a basic security impact of that&#8230; then i usually go for major listed security vulnerabilities i use the methods to achieve them nothing much special just all depends on an app you can&#8217;t find a PHP code injection in a static web lol so that&#8217;s why i usually  give good time on learning the web flow. for this i go got reading API docs and stuff. After spending a few hours on this stuff, if i can’t get anything on a particular point of the app i usually stop and move on. <br>Getting hung up on something is the biggest motivation killer but that doesn’t mean i gave up. I do get back to it later if something else comes up. That’s why i always make notes and save them for later use.<br><br>That’s basically all i do lol looks basic and easy but for me it&#8217;s hell time spent&#8230;<br></p>
+
+
+
+<h3>Reporting a Vulnerability?</h3>
+
+
+
+<p>So i&#8217;ll say after all this effort you have put into learning, practicing, &amp; actually successfully finding an vulnerability, writing a report will be one of the most difficult tasks. Because one mistake can make the team reviewing them annoyed or maybe increase their workflow. for me Writing a simple but effective report with proper headings and giving as much details as possible with POC images or videos can actually make your work fun and the teams work easy. to Write a report i follow these guides.<br><br><a href="https://www.bugcrowd.com/blog/writing-successful-bug-submissions-bug-bounty-hunter-methodology/"><strong>WRITING SUCCESSFUL BUG SUBMISSIONS – BUG BOUNTY HUNTER METHODOLOGY</strong></a><br><br><strong><a href="https://medium.com/@tolo7010/writing-a-good-and-detailed-vulnerability-report-bdb86cedcff">Writing a good and detailed vulnerability report</a></strong><br><br><strong><a href="https://bugbountyguide.com/hunters/writing-reports.html">What does a good report look like?</a></strong></p>
+
+
+
+<p>Well i guess this is where i&#8217;ll end this Blog and i hope these resources i&#8217;m sharing here help answer the questions i basically get in my DMs about teaching them. I myself is a student right now and learning is a huge part of my life also, i consider myself a beginner and sharing this is basically a way for me to learn more.. As Mentioned before this Guide is basically  for people who are absolutely new or are still looking for a proper way about what to learn first and from where.</p>
+
+
+
+<h1><em><strong>Ending Note!</strong></em></h1>
+
+
+
+<p><strong>B</strong>eing a security researcher, it is really tough to keep yourself up to date. I’d ask the beginners to focus on self study and learn things by themselves as everything is possible all you need is the passion of taking a step after that you can achieve anything. Nothing is impossible to achieve. All i achieved was by doing self-study and self motivation and without any certifications and i&#8217;m still learning and trying my best to share what i can so others can also learn something. </p>
+
+
+
+<blockquote style="text-align:center" class="wp-block-quote"><p><br><strong><em>You are never a perfect person, but you are still better than the rest of the people. </em></strong></p></blockquote>
+
+
+
+<p>For a security researcher, all it takes is the passion to achieve something. I hope this article helped you motivate to take a positive step in life..   Well Thanks for reading that’s All I can Share With you Guys For Now I&#8217;ll Make sure to Keep this Article Updated for More People to read.</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://i2.wp.com/media.giphy.com/media/Mp4hQy51LjY6A/giphy.gif?w=700&#038;ssl=1" alt="" data-recalc-dims="1"/></figure></div>
+
+
+
+<p class="has-medium-font-size"><strong>./THANKS</strong></p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-145" class="share-twitter sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-145" class="share-facebook sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-linkedin"><a rel="nofollow noopener noreferrer" data-shared="sharing-linkedin-145" class="share-linkedin sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer" data-shared="" class="share-tumblr sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=tumblr" target="_blank" title="Click to share on Tumblr"><span></span><span class="sharing-screen-reader-text">Click to share on Tumblr (Opens in new window)</span></a></li><li class="share-telegram"><a rel="nofollow noopener noreferrer" data-shared="" class="share-telegram sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=telegram" target="_blank" title="Click to share on Telegram"><span></span><span class="sharing-screen-reader-text">Click to share on Telegram (Opens in new window)</span></a></li><li class="share-jetpack-whatsapp"><a rel="nofollow noopener noreferrer" data-shared="" class="share-jetpack-whatsapp sd-button share-icon no-text" href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?share=jetpack-whatsapp" target="_blank" title="Click to share on WhatsApp"><span></span><span class="sharing-screen-reader-text">Click to share on WhatsApp (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-136858665-145-5ddc322ecf027' data-src='https://widgets.wp.com/likes/#blog_id=136858665&amp;post_id=145&amp;origin=whoami.securitybreached.org&amp;obj_id=136858665-145-5ddc322ecf027' data-name='like-post-frame-136858665-145-5ddc322ecf027'><h3 class="sd-title">Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>	
+	</div>
+<footer class="entry-footer"><div class="entry-meta">
+	<span class="entry-terms category" itemprop="articleSection">Posted in: <a href="https://whoami.securitybreached.org/category/notes/tips/" rel="tag">Tips</a></span>	<span class="entry-terms post_tag" itemprop="keywords">Tagged: <a href="https://whoami.securitybreached.org/tag/aslicybersecurity/" rel="tag">AsliCyberSecurity</a>, <a href="https://whoami.securitybreached.org/tag/bug-bounty-hunting/" rel="tag">BUG BOUNTY HUNTING</a>, <a href="https://whoami.securitybreached.org/tag/bug-hunting/" rel="tag">Bug Hunting</a>, <a href="https://whoami.securitybreached.org/tag/bugbounties/" rel="tag">BugBounties</a>, <a href="https://whoami.securitybreached.org/tag/bugbountyhunting/" rel="tag">Bugbountyhunting</a>, <a href="https://whoami.securitybreached.org/tag/bugcrowd/" rel="tag">Bugcrowd</a>, <a href="https://whoami.securitybreached.org/tag/cyber-security/" rel="tag">Cyber Security</a>, <a href="https://whoami.securitybreached.org/tag/guide-to-bugbounty/" rel="tag">Guide to BugBounty</a>, <a href="https://whoami.securitybreached.org/tag/hackerone/" rel="tag">HackerOne</a>, <a href="https://whoami.securitybreached.org/tag/infosec/" rel="tag">InfoSec</a></span>		
+</div></footer>		</div></article>				
+		<nav role="navigation" id="nav-below" class="navigation  post-navigation">
+
+	<div class="nav-previous alignleft"><a href="https://whoami.securitybreached.org/2017/10/09/who-am-i-and-my-experiments-with-hacking/" rel="prev"><span class="meta-nav">&larr;</span> WHO AM I? And My Experiments with Hacking?</a></div>
+	</nav><!-- #nav-below -->
+	<div id="comments" class="entry-comments">
+		<h3>14 Comments</h3>
+		
+	<ol class="comment-list">
+		<li class="comment even thread-even depth-1" id="comment-1445">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/7c3eed1042e0b5bacb17b23cbb74a903?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/7c3eed1042e0b5bacb17b23cbb74a903?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn"><a href='http://none' rel='external nofollow ugc' class='url fn n' itemprop="url"><span itemprop="name">malav/Wolfdroid</span></a></cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-03T08:26:43+00:00" title="Monday, June 3, 2019, 8:26 am" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1445">June 3, 2019 at 8:26 am</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Great blog &#8230;. Try a tool by yourself and if you find it cool and useful , you can add it to your list . The name of the tool is GOOHAK </p>
+<p>Here is the link<br />
+<a href="https://github.com/1N3/Goohak" rel="nofollow ugc">https://github.com/1N3/Goohak</a></p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1445#respond' data-commentid="1445" data-postid="145" data-belowelement="comment-1445" data-respondelement="respond" aria-label='Reply to malav/Wolfdroid'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1446">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/cb856736e100b269a0c5eb98f43de8ec?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/cb856736e100b269a0c5eb98f43de8ec?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">Sadiq West</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-03T20:31:26+00:00" title="Monday, June 3, 2019, 8:31 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1446">June 3, 2019 at 8:31 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>I recommend this blog to both pro&#8217;s and newbies. Thanks bro awesome article</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1446#respond' data-commentid="1446" data-postid="145" data-belowelement="comment-1446" data-respondelement="respond" aria-label='Reply to Sadiq West'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --><li class="comment even thread-even depth-1" id="comment-1447">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/2c688785ad979b7b6dca47a56805c375?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/2c688785ad979b7b6dca47a56805c375?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn"><a href='http://none_0f.com' rel='external nofollow ugc' class='url fn n' itemprop="url"><span itemprop="name">axyz</span></a></cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-04T05:45:51+00:00" title="Tuesday, June 4, 2019, 5:45 am" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1447">June 4, 2019 at 5:45 am</a></time>
+					</p>
+		<div class="comment-content">
+			<p>kadak bhai 😁 i mean amazing but the drive link is not opening will you allow me??</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1447#respond' data-commentid="1447" data-postid="145" data-belowelement="comment-1447" data-respondelement="respond" aria-label='Reply to axyz'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1448">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/f0edd7ae9509a54af9c8efad271a143a?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/f0edd7ae9509a54af9c8efad271a143a?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">thenewbhaxor</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-04T10:24:31+00:00" title="Tuesday, June 4, 2019, 10:24 am" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1448">June 4, 2019 at 10:24 am</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Thanks a lot for this brief writing and it is a gold mine for me as I want to start my journey in bugbounty!</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1448#respond' data-commentid="1448" data-postid="145" data-belowelement="comment-1448" data-respondelement="respond" aria-label='Reply to thenewbhaxor'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --><li class="comment even thread-even depth-1" id="comment-1449">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/d6948fa36ead381ac3d8e30777f56b33?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/d6948fa36ead381ac3d8e30777f56b33?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">negro1337</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-04T16:52:54+00:00" title="Tuesday, June 4, 2019, 4:52 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1449">June 4, 2019 at 4:52 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Just awsome negro</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1449#respond' data-commentid="1449" data-postid="145" data-belowelement="comment-1449" data-respondelement="respond" aria-label='Reply to negro1337'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1456">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/977ca5e3e76256d705fe2774d1ac68dc?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/977ca5e3e76256d705fe2774d1ac68dc?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">Ed Carlos</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-06T16:17:41+00:00" title="Thursday, June 6, 2019, 4:17 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1456">June 6, 2019 at 4:17 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Just one thing.<br />
+Your linux commands list contains this:<br />
+&#8220;rm -rf / &#8211; make computer faster&#8221;<br />
+And that really shouldn&#8217;t be there</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1456#respond' data-commentid="1456" data-postid="145" data-belowelement="comment-1456" data-respondelement="respond" aria-label='Reply to Ed Carlos'>Reply</a>		</div>
+			
+	</article>	
+<ul class="children">
+<li class="comment byuser comment-author-babayaga47 bypostauthor even depth-2 role-administrator" id="comment-1457">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">babayaga47</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-06T16:18:40+00:00" title="Thursday, June 6, 2019, 4:18 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1457">June 6, 2019 at 4:18 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>😂 i hope if someone is trying to learn this he/She knows what that is </p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1457#respond' data-commentid="1457" data-postid="145" data-belowelement="comment-1457" data-respondelement="respond" aria-label='Reply to babayaga47'>Reply</a>		</div>
+			
+	</article>	
+<ul class="children">
+<li class="comment odd alt depth-3" id="comment-1458">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/977ca5e3e76256d705fe2774d1ac68dc?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/977ca5e3e76256d705fe2774d1ac68dc?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">Ed Carlos</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-06T16:38:48+00:00" title="Thursday, June 6, 2019, 4:38 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1458">June 6, 2019 at 4:38 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>i really hope so.<br />
+But this is the internet, you never know hahaha</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1458#respond' data-commentid="1458" data-postid="145" data-belowelement="comment-1458" data-respondelement="respond" aria-label='Reply to Ed Carlos'>Reply</a>		</div>
+			
+	</article>	
+<ul class="children">
+<li class="comment byuser comment-author-babayaga47 bypostauthor even depth-4 role-administrator" id="comment-1459">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">babayaga47</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-06T16:55:43+00:00" title="Thursday, June 6, 2019, 4:55 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1459">June 6, 2019 at 4:55 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Hahaha 😂</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1459#respond' data-commentid="1459" data-postid="145" data-belowelement="comment-1459" data-respondelement="respond" aria-label='Reply to babayaga47'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --></ul><!-- .children -->
+</li><!-- .comment --></ul><!-- .children -->
+</li><!-- .comment --></ul><!-- .children -->
+</li><!-- .comment --><li class="comment odd alt thread-even depth-1" id="comment-1489">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/2f5b3fa26595bc45871213860db4668f?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/2f5b3fa26595bc45871213860db4668f?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn"><a href='http://none' rel='external nofollow ugc' class='url fn n' itemprop="url"><span itemprop="name">Anonymois</span></a></cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-13T06:14:24+00:00" title="Thursday, June 13, 2019, 6:14 am" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1489">June 13, 2019 at 6:14 am</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Many thanks u just saved me hours of researching<br />
+Great job amd good luck in your journey</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1489#respond' data-commentid="1489" data-postid="145" data-belowelement="comment-1489" data-respondelement="respond" aria-label='Reply to Anonymois'>Reply</a>		</div>
+			
+	</article>	
+<ul class="children">
+<li class="comment byuser comment-author-babayaga47 bypostauthor even depth-2 role-administrator" id="comment-1490">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">babayaga47</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-13T06:15:06+00:00" title="Thursday, June 13, 2019, 6:15 am" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1490">June 13, 2019 at 6:15 am</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Thanks 🧡</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1490#respond' data-commentid="1490" data-postid="145" data-belowelement="comment-1490" data-respondelement="respond" aria-label='Reply to babayaga47'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --></ul><!-- .children -->
+</li><!-- .comment --><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1504">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/7a53162c839dbd7e76b735bfad7417e3?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/7a53162c839dbd7e76b735bfad7417e3?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn"><a href='http://ijazhus.blogspot.com' rel='external nofollow ugc' class='url fn n' itemprop="url"><span itemprop="name">Ejaz Hussain</span></a></cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-15T15:42:57+00:00" title="Saturday, June 15, 2019, 3:42 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1504">June 15, 2019 at 3:42 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>i think you should review the yt channel links section because they are same as the last your whoami post  which contained some gaming and terminated channel  which is not helpful. thanks</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1504#respond' data-commentid="1504" data-postid="145" data-belowelement="comment-1504" data-respondelement="respond" aria-label='Reply to Ejaz Hussain'>Reply</a>		</div>
+			
+	</article>	
+<ul class="children">
+<li class="comment byuser comment-author-babayaga47 bypostauthor even depth-2 role-administrator" id="comment-1505">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/af0941fd6a6d0d9bfafdf79c7fff746b?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">babayaga47</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-15T15:45:03+00:00" title="Saturday, June 15, 2019, 3:45 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1505">June 15, 2019 at 3:45 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>Thanka for that I actually mentioned that some of them are moved from previous post and also have a good new list will update it </p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1505#respond' data-commentid="1505" data-postid="145" data-belowelement="comment-1505" data-respondelement="respond" aria-label='Reply to babayaga47'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment --></ul><!-- .children -->
+</li><!-- .comment --><li class="comment odd alt thread-even depth-1" id="comment-1521">
+	<article class="comment-item" itemscope="itemscope" itemtype="http://schema.org/UserComments">
+		<p class="comment-author" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
+			<img alt='' src='https://secure.gravatar.com/avatar/4d97e83d9108a9bad1daa83305a498e2?s=48&#038;r=g' srcset='https://secure.gravatar.com/avatar/4d97e83d9108a9bad1daa83305a498e2?s=96&#038;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' itemprop="image" />			<cite class="fn">Aurangzaib Pario</cite>		</p>
+		<p class="comment-meta"> 
+			<time class="comment-published" datetime="2019-06-18T23:00:33+00:00" title="Tuesday, June 18, 2019, 11:00 pm" itemprop="commentTime"><a href="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#comment-1521">June 18, 2019 at 11:00 pm</a></time>
+					</p>
+		<div class="comment-content">
+			<p>wow &#8230;. what a post man &#8230; !! LONG LIVE &#8230; 😍😍 &#8230; publish your own PDF and you can get bucks from it man &#8230; Go on 😊</p>
+		</div><!-- .comment-content -->
+		<div class="reply">
+			<a itemprop="replyToUrl"rel='nofollow' class='comment-reply-link' href='https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/?replytocom=1521#respond' data-commentid="1521" data-postid="145" data-belowelement="comment-1521" data-respondelement="respond" aria-label='Reply to Aurangzaib Pario'>Reply</a>		</div>
+			
+	</article>	
+</li><!-- .comment -->	</ol><!-- .comment-list -->
+</div><!-- #comments -->
+	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2019/06/03/guide-getting-started-in-bug-bounty-hunting/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://whoami.securitybreached.org/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='145' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="0daba7e618" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="192"/></p></form>	</div><!-- #respond -->
+	</main><!-- .content -->
+		</div>	</div><!-- .site-inner -->
+		
+	<aside id="sidebar" class="sidebar sidebar-primary widget-area" role="complementary" itemscope itemtype="http://schema.org/WPSideBar">	
+				<section id="blog_subscription-2" class="widget widget-1 even widget-first widget_blog_subscription jetpack_subscription_widget"><div class="widget-wrap"><h4 class="widget-title">Subscribe to Blog via Email</h4>
+            <form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2">
+				                    <div id="subscribe-text"><p>Enter your email address to subscribe to this blog and receive notifications of new posts by email.</p>
+</div><p>Join 45 other subscribers</p>
+                    <p id="subscribe-email">
+                        <label id="jetpack-subscribe-label"
+                               class="screen-reader-text"
+                               for="subscribe-field-blog_subscription-2">
+							Email Address                        </label>
+                        <input type="email" name="email" required="required" class="required"
+                               value=""
+                               id="subscribe-field-blog_subscription-2"
+                               placeholder="Email Address"/>
+                    </p>
+
+                    <p id="subscribe-submit">
+                        <input type="hidden" name="action" value="subscribe"/>
+                        <input type="hidden" name="source" value="https://whoami.securitybreached.org/2019/06/03/guide-getting-started-in-bug-bounty-hunting/"/>
+                        <input type="hidden" name="sub-type" value="widget"/>
+                        <input type="hidden" name="redirect_fragment" value="blog_subscription-2"/>
+						                        <button type="submit"
+	                        		                    	                        name="jetpack_subscriptions_widget"
+	                    >
+	                        Subscribe                        </button>
+                    </p>
+				            </form>
+		
+</div></section><section id="wpcom_social_media_icons_widget-2" class="widget widget-2 odd widget_wpcom_social_media_icons_widget"><div class="widget-wrap"><h4 class="widget-title">Social</h4><ul><li><a href="https://www.facebook.com/MuhammadKhizerJaved33/" class="genericon genericon-facebook" target="_blank"><span class="screen-reader-text">View MuhammadKhizerJaved33&#8217;s profile on Facebook</span></a></li><li><a href="https://twitter.com/KHIZER_JAVED47/" class="genericon genericon-twitter" target="_blank"><span class="screen-reader-text">View KHIZER_JAVED47&#8217;s profile on Twitter</span></a></li><li><a href="https://www.instagram.com/muhammadkhizerjaved/" class="genericon genericon-instagram" target="_blank"><span class="screen-reader-text">View muhammadkhizerjaved&#8217;s profile on Instagram</span></a></li><li><a href="https://www.pinterest.com/mkhizerj/" class="genericon genericon-pinterest" target="_blank"><span class="screen-reader-text">View mkhizerj&#8217;s profile on Pinterest</span></a></li><li><a href="https://www.linkedin.com/in/muhammad-khizer-javed/" class="genericon genericon-linkedin" target="_blank"><span class="screen-reader-text">View muhammad-khizer-javed&#8217;s profile on LinkedIn</span></a></li><li><a href="https://github.com/MuhammadKhizerJaved/" class="genericon genericon-github" target="_blank"><span class="screen-reader-text">View MuhammadKhizerJaved&#8217;s profile on GitHub</span></a></li><li><a href="https://www.youtube.com/user/muhammadkhizerjaved/" class="genericon genericon-youtube" target="_blank"><span class="screen-reader-text">View muhammadkhizerjaved&#8217;s profile on YouTube</span></a></li><li><a href="https://plus.google.com/u/0/110508361070446808779/" class="genericon genericon-googleplus" target="_blank"><span class="screen-reader-text">View 110508361070446808779&#8217;s profile on Google+</span></a></li></ul></div></section><section id="facebook-likebox-2" class="widget widget-3 even widget_facebook_likebox"><div class="widget-wrap"><h4 class="widget-title"><a href="https://web.facebook.com/secbreached">Security Breached</a></h4>		<div id="fb-root"></div>
+		<div class="fb-page" data-href="https://web.facebook.com/secbreached" data-width="340"  data-height="580" data-hide-cover="false" data-show-facepile="true" data-tabs="timeline">
+		<div class="fb-xfbml-parse-ignore"><blockquote cite="https://web.facebook.com/secbreached"><a href="https://web.facebook.com/secbreached">Security Breached</a></blockquote></div>
+		</div>
+		</div></section><section id="blog-stats-2" class="widget widget-4 odd blog-stats"><div class="widget-wrap"><h4 class="widget-title">Blog Stats</h4><ul><li>38,138 hits</li></ul></div></section><section id="twitter_timeline-2" class="widget widget-5 even widget-last widget_twitter_timeline"><div class="widget-wrap"><h4 class="widget-title">Follow me on Twitter</h4><a class="twitter-timeline" data-theme="light" data-link-color="#f96e5b" data-border-color="#e8e8e8" data-tweet-limit="5" data-lang="EN" data-partner="jetpack" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/KHIZER_JAVED47" href="https://twitter.com/KHIZER_JAVED47">My Tweets</a></div></section>		<div class="footer-content footer-insert"><p class="copyright">Copyright &#169; 2019 Muhammad Khizer Javed.</p>
+
+<p class="credit"><a class="child-link" href="https://themehall.com/me-omega-child-theme" title="Me WordPress Theme">Me</a> WordPress Theme by themehall.com</p></div>  	</aside><!-- .sidebar -->
+<footer id="footer" class="site-footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter"><div class="wrap"></div></footer><!-- .site-footer --></div><!-- .site-container -->
+	<div style="display:none">
+	<div class="grofile-hash-map-7c3eed1042e0b5bacb17b23cbb74a903">
+	</div>
+	<div class="grofile-hash-map-77fd2edb80bf700ad80fd4b4ec854e53">
+	</div>
+	<div class="grofile-hash-map-2c688785ad979b7b6dca47a56805c375">
+	</div>
+	<div class="grofile-hash-map-f0edd7ae9509a54af9c8efad271a143a">
+	</div>
+	<div class="grofile-hash-map-d6948fa36ead381ac3d8e30777f56b33">
+	</div>
+	<div class="grofile-hash-map-977ca5e3e76256d705fe2774d1ac68dc">
+	</div>
+	<div class="grofile-hash-map-af0941fd6a6d0d9bfafdf79c7fff746b">
+	</div>
+	<div class="grofile-hash-map-2f5b3fa26595bc45871213860db4668f">
+	</div>
+	<div class="grofile-hash-map-7a53162c839dbd7e76b735bfad7417e3">
+	</div>
+	<div class="grofile-hash-map-4d97e83d9108a9bad1daa83305a498e2">
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/whoami.securitybreached.org\/2019\/06\/03\/guide-getting-started-in-bug-bounty-hunting\/":145};
+	</script>
+				<link rel='stylesheet' id='genericons-css'  href='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20191001'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201948'></script>
+<script type='text/javascript' src='https://secure.gravatar.com/js/gprofiles.js?ver=2019Novaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/modules/wpgroho.js?ver=5.3'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-includes/js/comment-reply.min.js?ver=5.3'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/themes/me/js/menu.js?ver=1.0.0'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jpfbembed = {"appid":"249643311490","locale":"en_US"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/facebook-embed.min.js'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/twitter-timeline.min.js?ver=4.0.0'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-includes/js/wp-embed.min.js?ver=5.3'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/spin.min.js?ver=1.3'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/jquery.spin.min.js?ver=1.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/whoami.securitybreached.org\/wp-admin\/admin-ajax.php","nonce":"b1916227f3","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/whoami.securitybreached.org\/babayaga\/?redirect_to=https%3A%2F%2Fwhoami.securitybreached.org%2F2019%2F06%2F03%2Fguide-getting-started-in-bug-bounty-hunting%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/carousel/jetpack-carousel.min.js?ver=20190102'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/postmessage.min.js?ver=7.9.1'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/jquery.jetpack-resize.min.js?ver=7.9.1'></script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/likes/queuehandler.min.js?ver=7.9.1'></script>
+<script async="async" type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/akismet/_inc/form.js?ver=4.1.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://whoami.securitybreached.org/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=7.9.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-tumblr', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-telegram', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtelegram', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=201948#ver=201948' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script type='text/javascript' src='https://stats.wp.com/e-201948.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:7.9.1',blog:'136858665',post:'145',tz:'0',srv:'whoami.securitybreached.org'} ]);
+	_stq.push([ 'clickTrackerInit', '136858665', '145' ]);
+</script>
+</body>
+</html>
+<!-- Page generated by LiteSpeed Cache 2.9.9.2 on 2019-11-25 19:57:35 -->

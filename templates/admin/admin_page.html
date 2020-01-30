@@ -1,0 +1,274 @@
+{% extends 'base.html'%}
+{% block slide %}
+    <div class="row">
+    <div class="col-2 bg-light" style="height: 100vh">
+    <div class="bg-light">
+      <div class="list-group list-group-flush">
+        <button class="list-group-item list-group-item-action bg-light" onclick="ShowAndHideTrad('clientelle','Traducteuriat','docs','stats')"><b>Clients</b></button>
+        <button class="list-group-item list-group-item-action bg-light" onclick="ShowAndHideTrad('Traducteuriat','clientelle','docs','stats')"><b>Traducteurs</b></button>
+        <button class="list-group-item list-group-item-action bg-light" onclick="ShowAndHideTrad('docs','clientelle','Traducteuriat','stats')"><b>Documents</b></button>
+        <button class="list-group-item list-group-item-action bg-light" onclick="ShowAndHideTrad('stats','clientelle','docs','Traducteuriat')"><b>Statistiques</b></button>
+         <button data-target="#deconnexion" data-toggle="modal" class="list-group-item list-group-item-action bg-light"><b>Deconnexion</b></button>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+    <div class="mt-2 mb-2 mr-2">
+{#    //////////////////////////////Clients//////////////////////////////#}
+        <div class="forms-display" id="clientelle">
+        <div class="col">
+        <h1 class="navbar-brand">Liste des clients</h1>
+        <button class="btn btn-info" data-target="#client" data-toggle="modal">Ajouter client</button>
+        </div>
+     <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Wilaya</th>
+            <th scope="col">Commune</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Fax</th>
+            <th>
+{#                Modifier#}
+            </th>
+              <th>
+{#                  Supprimer#}
+              </th>
+              <th>
+{#                  Bloquer#}
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ client.username }}</td>
+            <td>{{ client.Nom }}</td>
+            <td>{{ client.Prénom }}</td>
+            <td>{{ client.Wilaya }}</td>
+            <td>{{ client.Commune }}</td>
+            <td>{{ client.Adresse }}</td>
+            <td>{{ client.Telephone }}</td>
+            <td>{{ client.Fax }}</td>
+            <td>
+                <a href="{% url 'Traduction:admin_modify' pk=client.username %}"><button class="btn btn-primary">Modifier</button></a></td>
+            <td>
+                {% if client.is_blocked %}
+                    <a href="{% url 'Traduction:block_user' pk=client.username %}"><button class="btn btn-warning">Débloquer</button></a>
+                {% else %}
+                    <a href="{% url 'Traduction:block_user' pk=client.username %}"><button class="btn btn-warning">Bloquer</button></a></td>
+                {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {#    //////////////////////////////traducteurs//////////////////////////////#}
+        <div class="forms-display" id="Traducteuriat">
+        <div class="col">
+        <h1 class="navbar-brand">Liste des Traducteurs</h1>
+        <button class="btn btn-info" data-toggle="modal" data-target="#traducteur">Ajouter traducteur</button>
+        </div>
+        <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Cv</th>
+            <th scope="col">Type</th>
+            <th scope="col">Langues</th>
+            <th scope="col">Assermenté</th>
+            <th scope="col">Note</th>
+            <th scope="col">Wilaya</th>
+            <th scope="col">Commune</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Fax</th>
+            <th>
+{#                Modifier#}
+            </th>
+              <th>
+{#                  Supprimer#}
+              </th>
+              <th>
+{#                  Bloquer#}
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for traducteur in traducteurs %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ traducteur.username }}</td>
+            <td>{{ traducteur.Nom }}</td>
+            <td>{{ traducteur.Prénom }}</td>
+            <td><a href="{{ traducteur.cv.url }}" target="_blank">ici</a></td>
+            <td>{{ traducteur.type }}</td>
+            <td>
+                {% for langue in traducteur.languages.all %}
+                    {{ langue.title }}
+                {% endfor %}
+            </td>
+            <td>{% if traducteur.is_assermented %}
+                Oui
+                {% else %}
+                Non
+                {% endif %}
+            </td>
+            <td>{{ traducteur.get_note }}/10</td>
+            <td>{{ traducteur.Wilaya }}</td>
+            <td>{{ traducteur.Commune }}</td>
+            <td>{{ traducteur.Adresse }}</td>
+            <td>{{ traducteur.Telephone }}</td>
+            <td>{{ traducteur.Fax }}</td>
+            <td>
+                <a href="{% url 'Traduction:admin_modify' pk=traducteur.username %}"><button class="btn btn-primary">Modifier</button></a></td>
+            <td>
+                {% if traducteur.is_blocked %}
+                    <a href="{% url 'Traduction:block_user' pk=traducteur.username %}"><button class="btn btn-warning">Débloquer</button></a>
+                {% else %}
+                    <a href="{% url 'Traduction:block_user' pk=traducteur.username %}"><button class="btn btn-warning">Bloquer</button></a>
+            {% endif %}
+            </td>
+
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+        </div>
+{#    ///////////////////////Documents//////////////////////#}
+    <div class="forms-display" id="docs">docs</div>
+{#    ///////////////////////////statistics///////////////////////#}
+    <div class="forms-display" id="stats">stats</div>
+    </div>
+{#    ///////////////////////client modal///////////////////////////#}
+    <div class="modal fade" id="client" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajout Client</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                        <div>
+        <form class="text-center border border-light p-5 mt-2 mr-2 ml-2 mb-2" method="post" style="background-color: #F7F9FB" action="{% url 'Traduction:Signup' %}">
+            {% csrf_token %}
+            <p class="h4 mb-4">Ajout client</p>
+
+            <div class="form-row mb-4">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Nom" name="Nom">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Prénom" name="Prénom">
+                </div>
+            </div>
+            <input type="text" class="form-control mb-4" placeholder="Username" name="Username">
+            <input type="email" class="form-control mb-4" placeholder="E-mail" name="Mail">
+            <input type="password" class="form-control mb-4" placeholder="Mot de passe" name="Password">
+            <input type="text" class="form-control mb-4" placeholder="Wilaya" name="Wilaya">
+            <input type="text" class="form-control mb-4" placeholder="Commune" name="Commune">
+            <input type="text" class="form-control mb-4" placeholder="Adresse" name="Adresse">
+            <input type="text" class="form-control mb-4" placeholder="Telephone" name="Telephone">
+            <input type="text" class="form-control mb-4" placeholder="Fax" name="Fax">
+            <button class="btn btn-info my-4 btn-block" type="submit">S'inscrire</button>
+        </form>
+    </div>
+                    </div>
+                  </div>
+    </div>
+{#    ////////////////////////Traducteur modal///////////////////////#}
+    <div class="modal fade" id="traducteur" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajout Traducteur</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                        <div>
+        <form class="text-center border border-light p-5 mt-2 mr-2 ml-2 mb-2" style="background-color: #F7F9FB" id="inscrformtrad" method="post" enctype="multipart/form-data" action="{% url 'Traduction:SignupTrad' %}">
+    {% csrf_token %}
+    <p class="h4 mb-4">Formulaire de recrutement</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Nom" name="Nom">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Prénom" name="Prénom">
+        </div>
+    </div>
+    <input type="text" class="form-control mb-4" placeholder="Username" name="Username">
+    <input type="email" class="form-control mb-4" placeholder="E-mail" name="Mail">
+    <input type="password" class="form-control mb-4" placeholder="Mot de passe" name="Password">
+    <select multiple class="form-control mb-4" name="language">
+        {% for langue in langues %}
+        <option value="{{ langue }}">{{ langue.title }}</option>
+        {% endfor %}
+    </select>
+    <label for="type">Type des traductions</label>
+    <select  class="form-control mb-4" name="type" id="type">
+        <option value="General">General</option>
+        <option value="Scientifque">Scientifque</option>
+        <option value="Web">Web</option>
+    </select>
+    <div class="form-group">
+    <label for="fichier">Insérer le fichier CV</label>
+    <input type="file" class="form-control-file" id="cv" name="cv">
+  </div>
+    <div class="form-row mb-4">
+        <div class="col">
+            <input type="radio" value="True" name="assermente" onclick="ShowAndHide1('fichier')">  Je suis assermeté
+        </div>
+        <div class="col">
+            <input type="radio" value="False" name="assermente" onclick="ShowAndHide2('fichier')">    je ne suis pas assermenté
+        </div>
+    </div>
+    <div class="form-group" id="fichier" style="display: none">
+    <label for="fichier">Insérer le fichier</label>
+    <input type="file" class="form-control-file" name="fichier_assert">
+  </div>
+    <input type="text" class="form-control mb-4" placeholder="Wilaya" name="Wilaya">
+    <input type="text" class="form-control mb-4" placeholder="Commune" name="Commune">
+    <input type="text" class="form-control mb-4" placeholder="Adresse" name="Adresse">
+    <input type="text" class="form-control mb-4" placeholder="Telephone" name="Telephone">
+    <input type="text" class="form-control mb-4" placeholder="Fax" name="Fax">
+    <button class="btn btn-info my-4 btn-block" type="submit">S'inscrire</button>
+</form>
+    </div>
+  </div>
+    </div>
+    </div>
+{#    //////////////////////deconnexion modal/////////////////////////#}
+    <div class="modal fade" id="deconnexion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Deconnexion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="card-text">Etes vous sure de déconnecter?</p>
+                      </div>
+                      <div class="modal-footer">
+                          <a href="{% url 'Traduction:Logout' %}" style="color: inherit; text-decoration: none"><button type="button" class="btn btn-primary">oui</button></a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    </div>
+</div>
+{% endblock slide %}

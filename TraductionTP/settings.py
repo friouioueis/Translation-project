@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Traduction',
+    'captcha'
 ]
+
+RECAPTCHA_PUBLIC_KEY = '6LcyDdMUAAAAAB65CAgJqyufJXn1Vv6Jw2L8dy4x'
+RECAPTCHA_PRIVATE_KEY = '6LcyDdMUAAAAAO_tiZSeFA0WxMj8Al9zy6epAnL7'
 
 AUTH_USER_MODEL = 'Traduction.User'
 

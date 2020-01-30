@@ -77,6 +77,7 @@
 </div>
 
 	<!-- /////////////////////////////////Slide Image/////////////////////////// -->
+{% block slide %}
 <div id="carouselExampleIndicators" class="carousel" data-ride="carousel" style="height: 50vh" data-interval="3000">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -107,6 +108,7 @@
     </div>
   </div>
 </div>
+{% endblock slide %}
 {% block content %}
 <div class="row">
 	<!-- //////////Left description side ////////////////////-->
@@ -121,7 +123,7 @@
   <div class="card-body">
     <h5 class="card-title">{{ article.title }}</h5>
     <p class="card-text">{{ article.Description }}</p>
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#firstmodal" >Lire la suite</a>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#firstmodal" >Lire la suite</button>
   </div>
     </div>
     {#    //////////modal///////////////////#}
@@ -149,9 +151,17 @@
 						<!-- ////////////////////right Side///////////////-->
 <div class="col">
     {% if request.user.is_authenticated %}
+        {% if request.user.is_client %}
+    <a href="{% url 'Traduction:client_profil' %}" style="padding-left: 30%; color: whitesmoke;"><button class="btn btn-primary btn-cnx mt-4 ml-5 mb-2">Profil</button></a>
+    {% endif %}
+    {% if request.user.is_translator %}
+    <a href="{% url 'Traduction:traducteur_profil' %}" style="padding-left: 30%; color: whitesmoke;"><button class="btn btn-primary btn-cnx ml-5 mt-4 mb-2">Profil</button></a>
+    {% endif %}
     {% else %}
+        {% block login %}
  	<button type="button" class="btn btn-primary btn-cnx mt-4 mr-4 ml-5 mb-2" onclick="ShowAndHide('connexform', 'inscrform')">Connexion</button>
  	<button type="button" class="btn btn-primary btn-cnx mt-4 mr-2 ml-5 mb-2" onclick="ShowAndHide('inscrform', 'connexform')">Inscription</button>
+        {% endblock login %}
     {% endif %}
 
 							<!-- Login Form-->
@@ -237,21 +247,36 @@
     </div>
     <input type="email" name="mail" class="form-control mb-4" placeholder="E-mail">
     <input type="text" name="adresse" class="form-control mb-4" placeholder="Adresse">
-    <select  multiple class="form-control mb-4" name="traducteur">
-        {% for traducteur in traducteurs %}
-        <option value="{{ traducteur.username }}">{{ traducteur.Nom }} {{ traducteur.Prénom }}</option>
+    <label for="type">Type de traduction</label>
+    <select  class="form-control mb-4" name="type" id="typetrad" onchange="Dropdownstate(this.value)">
+        <option value="" selected disabled hidden>Choisir un type...</option>
+        <option value="General">General</option>
+        <option value="Scientifque">Scientifque</option>
+        <option value="Web">Web</option>
+    </select>
+    <label for="traducteur"  class="forms-display"  id="label_trad">Traducteurs</label>
+    <select  multiple class="form-control mb-4 forms-display" name="traducteur" id="trad_general">
+        {% for traducteur in trad_gen %}
+        <option value="{{ traducteur.username }}"><b>Nom:</b> {{ traducteur.Nom }} <b>Prénom:</b> {{ traducteur.Prénom }} Note: {{ traducteur.get_note }} sur 10</option>
         {% endfor %}
     </select>
+
+    <select  multiple class="form-control mb-4 forms-display" name="traducteur" id="trad_science">
+        {% for traducteur in trad_sci %}
+        <option value="{{ traducteur.username }}"><b>Nom:</b> {{ traducteur.Nom }} <b>Prénom:</b> {{ traducteur.Prénom }} Note: {{ traducteur.get_note }} sur 10</option>
+        {% endfor %}
+    </select>
+
+    <select  multiple class="form-control mb-4 forms-display" name="traducteur" id="trad_weeb">
+        {% for traducteur in trad_web %}
+        <option value="{{ traducteur.username }}"><b>Nom:</b> {{ traducteur.Nom }} <b>Prénom:</b> {{ traducteur.Prénom }} Note: {{ traducteur.get_note }} sur 10</option>
+        {% endfor %}
+    </select>
+
     <select multiple class="form-control mb-4" name="language">
         {% for langue in langues %}
         <option value="{{ langue }}">{{ langue.title }}</option>
         {% endfor %}
-    </select>
-    <label for="type">Type de traduction</label>
-    <select  class="form-control mb-4" name="type">
-        <option value="General">General</option>
-        <option value="Scientifque">Scientifque</option>
-        <option value="Web">Web</option>
     </select>
     <div class="form-group">
     <label for="fichier">Insérer le fichier</label>
@@ -293,18 +318,6 @@
 		    </ul>
 		</div>
 </nav>
-{% if request.user.is_authenticated and request.user.is_client %}
-    <a href="{% url 'Traduction:client_profil' %}" style="padding-left: 50%; color: whitesmoke;">Profil</a>
-    {% endif %}
-{% if request.user.is_authenticated and request.user.is_translator %}
-    <a href="{% url 'Traduction:traducteur_profil' %}" style="padding-left: 50%; color: whitesmoke;">Profil</a>
-    {% endif %}
-{% if request.user.is_authenticated and request.user.is_superuser %}
-    <a href="/admin" style="padding-left: 50%; color: whitesmoke;">Profil</a>
-    {% endif %}
-{% if request.user.is_authenticated %}
-    <a href="{% url 'Traduction:Logout' %}" style="padding-left: 50%; color: whitesmoke;">Logout</a>
-    {% endif %}
     <div class="footer-copyright text-center py-3" style="color: whitesmoke">© 2020 Copyright:
     <a href="https://Esi.dz/" style="color: whitesmoke" target="_blank">Esi.dz</a>
     </div>
@@ -317,6 +330,45 @@
 	function ShowAndHide(id1,id2){
 	document.getElementById(id1).style.display="block";
 	document.getElementById(id2).style.display="none";
+}
+</script>
+<script type="text/javascript">
+function ShowAndHideTrad(id1,id2, id3, id4){
+	document.getElementById(id1).style.display="block";
+	document.getElementById(id2).style.display="none";
+	document.getElementById(id3).style.display="none";
+	document.getElementById(id4).style.display="none";
+}
+function ShowAndHide1(id) {
+    document.getElementById(id).style.display="block";
+}
+
+function ShowAndHide2(id) {
+    document.getElementById(id).style.display="none";
+}
+
+    function Dropdownstate(){
+    var state = document.getElementById('typetrad').value;
+    document.getElementById('label_trad').style.display="block";
+    if (state == 'General')
+    {
+        document.getElementById("trad_general").style.display="block";
+        document.getElementById("trad_science").style.display="none";
+        document.getElementById("trad_weeb").style.display="none";
+    }
+    if (state == 'Scientifque')
+    {
+        document.getElementById("trad_science").style.display="block";
+        document.getElementById("trad_general").style.display="none";
+        document.getElementById("trad_weeb").style.display="none";
+
+    }
+    if (state == 'Web')
+    {
+        document.getElementById("trad_weeb").style.display="block";
+        document.getElementById("trad_science").style.display="none";
+        document.getElementById("trad_general").style.display="none";
+    }
 }
 </script>
 </body>

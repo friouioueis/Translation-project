@@ -2,64 +2,105 @@
   <dictionary name="moi">
     <words>
       <w>adresse</w>
+      <w>ajout</w>
+      <w>ajouter</w>
+      <w>annuler</w>
+      <w>approuver</w>
+      <w>approuvé</w>
       <w>assermente</w>
       <w>assermented</w>
+      <w>assermenté</w>
       <w>assertmente</w>
       <w>authentifié</w>
       <w>avec</w>
+      <w>bien</w>
+      <w>bienvenue</w>
+      <w>bloquer</w>
       <w>bonjour</w>
+      <w>choisir</w>
+      <w>choix</w>
       <w>clientelle</w>
       <w>commentaires</w>
       <w>compte</w>
       <w>connecter</w>
       <w>créé</w>
+      <w>cxhoisir</w>
+      <w>deconnex</w>
       <w>deconnexion</w>
       <w>demande</w>
+      <w>demander</w>
       <w>demandes</w>
       <w>devis</w>
+      <w>dropdownstate</w>
+      <w>débloquer</w>
+      <w>déconnecter</w>
       <w>déjà</w>
+      <w>envoi</w>
       <w>envoyer</w>
+      <w>envoyé</w>
+      <w>etes</w>
       <w>existe</w>
       <w>fermer</w>
+      <w>fichi</w>
       <w>fichier</w>
       <w>firstmodal</w>
       <w>formulaire</w>
       <w>hiori</w>
       <w>ilaya</w>
       <w>informations</w>
+      <w>inscrformtrad</w>
       <w>insérer</w>
       <w>insérez</w>
       <w>langue</w>
       <w>langues</w>
+      <w>liste</w>
       <w>loggedin</w>
       <w>membre</w>
       <w>modifié</w>
       <w>multiselectfield</w>
       <w>navbar</w>
+      <w>noter</w>
       <w>nouveau</w>
       <w>prenom</w>
       <w>prit</w>
+      <w>prix</w>
       <w>profil</w>
       <w>profils</w>
       <w>prénom</w>
       <w>recrut</w>
       <w>recrutement</w>
+      <w>refuser</w>
+      <w>refusé</w>
       <w>rempilssez</w>
       <w>sauvegarder</w>
       <w>scientifique</w>
       <w>scientifque</w>
       <w>secondmodal</w>
       <w>signedup</w>
+      <w>statistiques</w>
       <w>succés</w>
+      <w>supprimer</w>
+      <w>supprimé</w>
       <w>tous</w>
+      <w>tradmodal</w>
+      <w>trads</w>
       <w>traducteur</w>
+      <w>traducteuriat</w>
+      <w>traducteurixat</w>
       <w>traducteurs</w>
       <w>traduction</w>
       <w>traductions</w>
+      <w>traduire</w>
+      <w>traduise</w>
+      <w>traduisé</w>
       <w>transla</w>
       <w>translatech</w>
+      <w>typetrad</w>
+      <w>téléphone</w>
       <w>utilisateur</w>
+      <w>utilsateur</w>
       <w>votre</w>
+      <w>vous</w>
       <w>wilaya</w>
     </words>
   </dictionary>
